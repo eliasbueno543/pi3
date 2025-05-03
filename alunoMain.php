@@ -1,3 +1,9 @@
+<?php
+
+	require "php/funcoes.php";
+
+?>
+
 <!doctype html>
 <html land="pt-br">
 	<head>
