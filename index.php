@@ -1,15 +1,3 @@
-<?php
-
-	require "php/funcoes.php";
-	
-	if (!isset($_POST['action'])){
-		
-	}else{
-		$loginResponse = loginUser();
-	}
-
-?>
-
 <!doctype html>
 <html lang="pt-br">
 	<head>
@@ -38,7 +26,7 @@
 			<div class="col-5 re"><h1>vermelho</h1></div>
 		</div>
 		-->
-     
+		
 		<!-- logo -->
 		<div class="container d-flex justify-content-center">
 		  <img src="img/logo.png" class="col-1">
@@ -79,7 +67,7 @@
 					<div class="accordion-body">
 				  
 						<!-- professor -->
-						<form action="" method="post">
+						<form id="formLoginProf"> <!--  action="php/login.php" method="post" -->
 						
 							<!-- campos de texto -->
 							<div class="mb-3">
@@ -93,10 +81,11 @@
 							</div>
 							
 							<!-- input usado para determinar qual formulario esta sendo preenchido -->
-							<input type="hidden" name="action" value="loginProfessor">
+							<input type="hidden" name="action" id="action" value="loginProfessor">
 							
 							<!-- botão pra logar -->
-							<input type="submit" class="btn btn-primary" value="Entrar como professor" id="submit">
+							<button type="button" class="btn btn-primary" id="entrarProf">Entrar como professor</button>
+							
 						</form>
 					</div>
 				  
@@ -136,24 +125,18 @@
 			</div>
 		
 		<!-- alert em caso de erro de login -->
-		<?php
-		
-			if (@$loginResponse != NULL && isset($_POST['action'])){
-				echo "<p>".@$loginResponse."</p>";
-			}
-		
-		?>
+		<p class="" id="erroMensagem"></p>
 			
 		</div>
 	  
-		</div>
-	  
 		<!-- javascript, colocado no fim do body pra acelerar o carregamento da página -->
+		
 		<!-- bootstrap js -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+	
+		<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 		
-		<!-- js manual -->
-		<script src="js/javascript.js" type="text/javascript">
+		<script src="js/javascript.js"></script>
 
 	</body>
 </html>
