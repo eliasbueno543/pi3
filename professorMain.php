@@ -70,7 +70,7 @@
 						  
 						  <ul class="dropdown-menu">
 							
-							<li><a href="#" class="dropdown-item">Aluno</a></li>
+							<li><a href="professorCadAluno.php" class="dropdown-item">Aluno</a></li>
 							<li><a href="professorCadProf.php" class="dropdown-item">Professor</a></li>
 							
 						  </ul>

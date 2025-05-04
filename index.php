@@ -25,7 +25,6 @@
 	  
 		<!-- css manual -->
 		<link href="css/cssMain.css" rel="stylesheet">
-  
 
 	</head>
 
@@ -97,18 +96,9 @@
 							<input type="hidden" name="action" value="loginProfessor">
 							
 							<!-- botão pra logar -->
-							<input type="submit" class="btn btn-primary" value="Entrar como professor">
+							<input type="submit" class="btn btn-primary" value="Entrar como professor" id="submit">
 						</form>
 					</div>
-		
-		<!-- alert em caso de erro de login -->
-		<?php
-		
-			if (@$loginResponse != NULL && isset($_POST['action'])){
-				echo "<p>".@$loginResponse."</p>";
-			}
-		
-		?>
 				  
 				</div>
 			  
@@ -144,8 +134,17 @@
 			  </div>
 			  
 			</div>
+		
+		<!-- alert em caso de erro de login -->
+		<?php
+		
+			if (@$loginResponse != NULL && isset($_POST['action'])){
+				echo "<p>".@$loginResponse."</p>";
+			}
+		
+		?>
 			
-		  </div>
+		</div>
 	  
 		</div>
 	  

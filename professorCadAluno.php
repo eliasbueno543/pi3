@@ -5,7 +5,7 @@
 	if(!isset($_POST['submit'])){
 		
 	}else{
-		$resultado = cadProf($_POST['cpf'], $_POST['nome'], $_POST['senha'], $_POST['confirmar'], $_POST['nascimento'], $_POST['genero']);
+		$resultado = cadAluno($_POST['cpf'], $_POST['nome'], $_POST['senha'], $_POST['confirmar'], $_POST['nascimento'], $_POST['genero'], $_POST['classe']);
 	}
 
 ?>
@@ -76,8 +76,8 @@
 						  
 						  <ul class="dropdown-menu">
 							
-							<li><a href="professorCadAluno.php" class="dropdown-item">Aluno</a></li>
-							<li><a href="professorCadProf.php" class="dropdown-item active">Professor</a></li>
+							<li><a href="professorCadAluno.php" class="dropdown-item active">Aluno</a></li>
+							<li><a href="professorCadProf.php" class="dropdown-item">Professor</a></li>
 							
 						  </ul>
 						</li>
@@ -119,17 +119,35 @@
 				</div>
 				
 				<div class="row container-fluid d-flex justify-content-center">
-					<div class="mb-3 col-md-5">
+					<div class="mb-3 col-md-4">
 						<label for="nascimento" class="form-label">Nascimento</label>
 						<input name="nascimento" type="date" class="form-control" id="nascimento">
 					</div>
 					
-					<div class="mb-3 col-md-5">
+					<div class="mb-3 col-md-3">
 						<label for="genero" class="form-label">Gênero</label>
 						<select name="genero" id="genero" class="form-select">
 							<option value="M">Masculino</option>
 							<option value="F">Feminino</option>
 							<option value="O">Outro</option>
+						</select>
+					</div>
+					
+					<div class="mb-3 col-md-3">
+						<label for="classe" class="form-label">Série</label>
+						<select name="classe" id="classe" class="form-select">
+							<?php
+							
+								// colocar uma opção para cada classe registrada no database
+								$conn = conectar();
+								$query = "SELECT * FROM serie";
+								$result = $conn->query($query);
+								
+								while($row = $result->fetch_assoc()){
+									echo "<option value='".$row['classe']."'>".$row['classe']."</option>";
+								}
+							
+							?>
 						</select>
 					</div>
 				</div>
