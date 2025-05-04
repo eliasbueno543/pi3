@@ -1,12 +1,6 @@
 <?php
 
-	require "php/funcoes.php";
-	
-	if(!isset($_POST['submit'])){
-		
-	}else{
-		$resultado = cadAluno($_POST['cpf'], $_POST['nome'], $_POST['senha'], $_POST['confirmar'], $_POST['nascimento'], $_POST['genero'], $_POST['classe']);
-	}
+	session_start();
 
 ?>
 
@@ -14,16 +8,16 @@
 <html land="pt-br">
 	<head>
 	
-  	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<title>PORTAL DO ALUNO - Colégio Galileu Caçapava</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>PORTAL DO ALUNO - Colégio Galileu Caçapava</title>
 
-  	<!-- bootstrap css e icons -->
-  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-  
-    <!-- css manual -->
-  	<link href="css/cssMain.css" rel="stylesheet">
+		<!-- bootstrap css e icons -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+	  
+		<!-- css manual -->
+		<link href="css/cssMain.css" rel="stylesheet">
   
 	</head>
 
@@ -52,7 +46,7 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
           
-				<button type="button" class="btn btn-light order-md-last"><a href="index.php">Sair</a></button>
+				<button type="button" class="btn btn-light order-md-last" id="userLogout">Sair</button>
         
 				<!-- a barra em si -->
 				<div class="collapse navbar-collapse justify-content-md-center" id="navegacao">
@@ -68,18 +62,18 @@
 						-->
             
 						<li class="nav-item">
-						  <a href="professorMain.php" class="nav-link" aria-current="page">Painel</a>
+							<a href="professorMain.php" class="nav-link" aria-current="page">Painel</a>
 						</li>
             
 						<li class="nav-item dropdown">
-						  <a href="#" class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastrar</a>
+							<a href="#" class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastrar</a>
 						  
-						  <ul class="dropdown-menu">
+							<ul class="dropdown-menu">
 							
-							<li><a href="professorCadAluno.php" class="dropdown-item active">Aluno</a></li>
-							<li><a href="professorCadProf.php" class="dropdown-item">Professor</a></li>
+								<li><a href="professorCadAluno.php" class="dropdown-item active">Aluno</a></li>
+								<li><a href="professorCadProf.php" class="dropdown-item">Professor</a></li>
 							
-						  </ul>
+							</ul>
 						</li>
             
 					</ul>
@@ -91,7 +85,7 @@
 		
 		<!-- formulario -->
 		<div class="container-fluid d-flex justify-content-center">
-			<form action="" method="post" class="col-10">
+			<form class="col-10" id="formCadAluno">
 							
 				<!-- campos a serem preenchidos -->
 				<div class="row container-fluid d-flex justify-content-center">
@@ -138,6 +132,7 @@
 						<select name="classe" id="classe" class="form-select">
 							<?php
 							
+								require "php/conexao.php";
 								// colocar uma opção para cada classe registrada no database
 								$conn = conectar();
 								$query = "SELECT * FROM serie";
@@ -154,21 +149,24 @@
 				
 				<!-- botão pra cadastrar -->
 				<div class="row container-fluid d-flex justify-content-center">
-					<input type="submit" name="submit" class="btn btn-primary col-10 col-lg-6" value="Cadastrar">
+					<button type="button" class="btn btn-primary col-10 col-lg-6" id="cadAluno">Cadastrar Aluno</button>
 				</div>
 			</form>
 		</div>
 		
-		<?php
-		
-			if ((@$result != NULL) && (isset($_POST['submit']))){
-				echo "<p>".$resultado."</p>";
-			}
-		
-		?>
+		<!-- erros de formulario -->
+		<p class="" id="erroMensagem"></p>
 
-		<!-- bootstrap js, colocado no fim do body pra acelerar o carregamento da página -->
+		<!-- javascript, colocado no fim do body pra acelerar o carregamento da página -->
+		
+		<!-- bootstrap js -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+	
+		<!-- jquery -->
+		<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+		
+		<!-- js manual -->
+		<script src="js/javascript.js"></script>
 
 	</body>
 </html>

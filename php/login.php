@@ -1,15 +1,10 @@
 <?php
-
-	require "conexao.php";
-	// login
-	// function loginUser()
-
+	
 	// escolher entre login de aluno ou professor
 	if ($_POST['action'] == "loginAluno"){
 		$cpf = $_POST['alunoCpf'];
 		$senha = $_POST['alunoSenha'];
 		$target = "aluno";
-		// echo "yay";
 	}elseif($_POST['action'] == "loginProfessor"){
 		$cpf = $_POST['professorCpf'];
 		$senha = $_POST['professorSenha'];
@@ -19,6 +14,7 @@
 	}
 	
 	// estabelecer conexao
+	require "conexao.php";
 	$conn = conectar();
 	
 	// checar dados
@@ -39,10 +35,14 @@
 		
 		// verificar se a senha esta correta
 		if(password_verify($senha, $data['senha']) == true){
-			$_SESSION["cpf"] = $cpf;
+			// cria uma sessao para armazenamento de cookies
+			session_start();
+			$_SESSION['cpf'] = $cpf;
+			// indica a pagina principal do aluno ou professor (definido por $target) para redirecionar apos sucesso de login
 			echo $target."Main.php";
 		}
 	}else{
+		// retornar false para a função jquery lança uma mensagem de erro
 		echo false;
 	}
 

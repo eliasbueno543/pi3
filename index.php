@@ -4,7 +4,7 @@
 	
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>PORTAL DO ALUNO - Colégio Galileu Caçapava</title>
+		<title>PORTAL - Colégio Galileu Caçapava</title>
 
 
 		<!-- bootstrap css e icons -->
@@ -29,7 +29,7 @@
 		
 		<!-- logo -->
 		<div class="container d-flex justify-content-center">
-		  <img src="img/logo.png" class="col-1">
+			<img src="img/logo.png" class="col-1">
 		</div>
 
 		<!-- corpo principal -->
@@ -40,87 +40,87 @@
 			
 				<div class="accordion-item">
 			  
-				<!--- cabeçalho: ponto de início do forumlário e posição dos botões -->
-				<div class="accordion-header">
+					<!--- cabeçalho: ponto de início do forumlário e posição dos botões -->
+					<div class="accordion-header">
+					
+						<!-- deixar o formato e texto dos botões responsívos ao tamanho do display -->
+						<!-- os botões fazem o formulario de login aparecer, apenas um a qualquer momento-->
+						<div class="d-grid gap-2 d-sm-flex justify-content-sm-evenly text-center">
 				
-					<!-- deixar o formato e texto dos botões responsívos ao tamanho do display -->
-					<!-- os botões fazem o formulario de login aparecer, apenas um a qualquer momento-->
-					<div class="d-grid gap-2 d-sm-flex justify-content-sm-evenly text-center">
-			
-						<button type="button" class="btn btn-dark col-10 mx-auto col-sm-5" data-bs-toggle="collapse" data-bs-target="#loginProf" aria-expanded="false" aria-controls="loginProf">
-							<h1><i class="bi bi-book-half"></i>
-							<br><span class="d-none d-lg-block align-items-center">ENTRAR COMO</span>PROFESSOR</h1>
-						</button>
-				  
-						<button type="button" class="btn btn-dark  col-10 mx-auto col-sm-5" data-bs-toggle="collapse" data-bs-target="#loginAluno" aria-expanded="false" aria-controls="loginAluno">
-							<h1><i class="bi bi-backpack2-fill"></i>
-							<br><span class="d-none d-lg-block align-items-center">ENTRAR COMO</span>ALUNO</h1>
-						</button>
-				  
+							<button type="button" class="btn btn-dark col-10 mx-auto col-sm-5" data-bs-toggle="collapse" data-bs-target="#loginProf" aria-expanded="false" aria-controls="loginProf">
+								<h1><i class="bi bi-book-half"></i>
+								<br><span class="d-none d-lg-block align-items-center">ENTRAR COMO</span>PROFESSOR</h1>
+							</button>
+					  
+							<button type="button" class="btn btn-dark  col-10 mx-auto col-sm-5" data-bs-toggle="collapse" data-bs-target="#loginAluno" aria-expanded="false" aria-controls="loginAluno">
+								<h1><i class="bi bi-backpack2-fill"></i>
+								<br><span class="d-none d-lg-block align-items-center">ENTRAR COMO</span>ALUNO</h1>
+							</button>
+					  
+						</div>
+					
 					</div>
-				
-				</div>
 			  
-				<!-- formulatio de login professor -->
-				<div id="loginProf" class="accordion-collapse collapse" data-bs-parent="#mostrarForm">
-				
-					<div class="accordion-body">
-				  
-						<!-- professor -->
-						<form id="formLoginProf"> <!--  action="php/login.php" method="post" -->
-						
-							<!-- campos de texto -->
-							<div class="mb-3">
-								<label for="professorCpf" class="form-label">CPF</label>
-								<input name="professorCpf" type="number" class="form-control" id="professorCpf">
-							</div>
+					<!-- formulatio de login professor -->
+					<div id="loginProf" class="accordion-collapse collapse" data-bs-parent="#mostrarForm">
+					
+						<div class="accordion-body">
+					  
+							<!-- professor -->
+							<form id="formLoginProf">
 							
-							<div class="mb-3">
-								<label for="professorSenha" class="form-label">Senha</label>
-								<input name="professorSenha" type="password" class="form-control" id="professorSenha">
-							</div>
-							
-							<!-- input usado para determinar qual formulario esta sendo preenchido -->
-							<input type="hidden" name="action" id="action" value="loginProfessor">
-							
-							<!-- botão pra logar -->
-							<button type="button" class="btn btn-primary" id="entrarProf">Entrar como professor</button>
-							
-						</form>
+								<!-- campos de texto -->
+								<div class="mb-3">
+									<label for="professorCpf" class="form-label">CPF</label>
+									<input name="professorCpf" type="number" class="form-control" id="professorCpf">
+								</div>
+								
+								<div class="mb-3">
+									<label for="professorSenha" class="form-label">Senha</label>
+									<input name="professorSenha" type="password" class="form-control" id="professorSenha">
+								</div>
+								
+								<!-- input usado para determinar qual formulario esta sendo preenchido -->
+								<input type="hidden" name="action" id="action" value="loginProfessor">
+								
+								<!-- botão pra logar -->
+								<button type="button" class="btn btn-primary" id="entrarProf">Entrar como professor</button>
+								
+							</form>
+						</div>
+					  
 					</div>
-				  
-				</div>
 			  
-				<!-- formulatio de login aluno -->
-				<div id="loginAluno" class="accordion-collapse collapse" data-bs-parent="#mostrarForm">
-				
-					<div class="accordion-body">
-				  
-						<!-- aluno -->
-						<form action="" method="post">
-						
-							<!-- campos de texto -->
-							<div class="mb-3">
-								<label for="alunoCpf" class="form-label">CPF</label>
-								<input name="alunoCpf" type="number" class="form-control" id="alunoCpf">
-							</div>
+					<!-- formulatio de login aluno -->
+					<div id="loginAluno" class="accordion-collapse collapse" data-bs-parent="#mostrarForm">
+					
+						<div class="accordion-body">
+					  
+							<!-- aluno -->
+							<form id="formLoginAluno">
 							
-							<div class="mb-3">
-								<label for="alunoSenha" class="form-label">Senha</label>
-								<input name="alunoSenha" type="password" class="form-control" id="alunoSenha">
-							</div>
-							
-							<!-- input usado para determinar qual formulario esta sendo preenchido -->
-							<input type="hidden" name="action" value="loginAluno">
-							
-							<!-- botão pra logar -->
-							<input type="submit" class="btn btn-primary" value="Entrar como aluno">
-						</form>
+								<!-- campos de texto -->
+								<div class="mb-3">
+									<label for="alunoCpf" class="form-label">CPF</label>
+									<input name="alunoCpf" type="number" class="form-control" id="alunoCpf">
+								</div>
+								
+								<div class="mb-3">
+									<label for="alunoSenha" class="form-label">Senha</label>
+									<input name="alunoSenha" type="password" class="form-control" id="alunoSenha">
+								</div>
+								
+								<!-- input usado para determinar qual formulario esta sendo preenchido -->
+								<input type="hidden" name="action" value="loginAluno">
+								
+								<!-- botão pra logar -->
+								<button type="button" class="btn btn-primary" id="entrarAluno">Entrar como aluno</button>
+							</form>
+						</div>
+					  
 					</div>
-				  
-				</div>
 				
-			  </div>
+				</div>
 			  
 			</div>
 		
@@ -134,8 +134,10 @@
 		<!-- bootstrap js -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 	
+		<!-- jquery -->
 		<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 		
+		<!-- js manual -->
 		<script src="js/javascript.js"></script>
 
 	</body>

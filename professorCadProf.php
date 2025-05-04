@@ -1,12 +1,6 @@
 <?php
 
-	require "php/funcoes.php";
-	
-	if(!isset($_POST['submit'])){
-		
-	}else{
-		$resultado = cadProf($_POST['cpf'], $_POST['nome'], $_POST['senha'], $_POST['confirmar'], $_POST['nascimento'], $_POST['genero']);
-	}
+	session_start();
 
 ?>
 
@@ -52,7 +46,7 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
           
-				<button type="button" class="btn btn-light order-md-last"><a href="index.php">Sair</a></button>
+				<button type="button" class="btn btn-light order-md-last" id="userLogout">Sair</button>
         
 				<!-- a barra em si -->
 				<div class="collapse navbar-collapse justify-content-md-center" id="navegacao">
@@ -91,7 +85,7 @@
 		
 		<!-- formulario -->
 		<div class="container-fluid d-flex justify-content-center">
-			<form action="" method="post" class="col-10">
+			<form class="col-10" id="formCadProf">
 							
 				<!-- campos a serem preenchidos -->
 				<div class="row container-fluid d-flex justify-content-center">
@@ -136,21 +130,24 @@
 				
 				<!-- botão pra cadastrar -->
 				<div class="row container-fluid d-flex justify-content-center">
-					<input type="submit" name="submit" class="btn btn-primary col-10 col-lg-6" value="Cadastrar">
+					<button type="button" class="btn btn-primary col-10 col-lg-6" id="cadProf">Cadastrar Professor</button>
 				</div>
 			</form>
 		</div>
 		
-		<?php
-		
-			if ((@$result != NULL) && (isset($_POST['submit']))){
-				echo "<p>".$resultado."</p>";
-			}
-		
-		?>
+		<!-- erros de formulario -->
+		<p class="" id="erroMensagem"></p>
 
-		<!-- bootstrap js, colocado no fim do body pra acelerar o carregamento da página -->
+		<!-- javascript, colocado no fim do body pra acelerar o carregamento da página -->
+		
+		<!-- bootstrap js -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+	
+		<!-- jquery -->
+		<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+		
+		<!-- js manual -->
+		<script src="js/javascript.js"></script>
 
 	</body>
 </html>
