@@ -158,3 +158,85 @@ $(document).ready(function(){
 	});
 });
 
+// alterar dados aluno selecionar aluno
+$(document).ready(function(){
+	// select num1 é ativado
+	var selOne = null;
+	$('#escolherClasse').change(function(){
+		selOne = $('#escolherClasse').find(":selected").val();
+		$.ajax({
+			type: 'post',
+			url: 'php/altAlunoSelect.php',
+			data: {
+				selOne: selOne
+			},
+			success: function(data, status){
+				$('#escolherAluno').html(data);
+				// alert(data);
+			},
+			error: function(data, status){
+				alert(data+status)
+			}
+		});
+	});
+	
+	// select num2 é ativado
+	var selTwo = null;
+	$('#escolherAluno').change(function(){
+		selTwo = $('#escolherAluno').find(":selected").val();
+		if (selTwo != null){
+			// alert(selTwo);
+			$.ajax({
+			type: 'post',
+			url: 'php/altAlunoSelect.php',
+			data: {
+				selTwo: selTwo
+			},
+			success: function(data, status){
+				var alunoArray = JSON.parse(data);
+				// alert(ar['nome']);
+				
+				document.getElementById('cpf').value = alunoArray['cpf'];
+				document.getElementById('nome').placeholder = alunoArray['nome'];
+				document.getElementById('genero').value = alunoArray['genero'];
+				document.getElementById('classe').value = alunoArray['classe'];
+				
+			},
+			error: function(data, status){
+				alert(data+status)
+			}
+		});
+		}
+	});
+});
+
+// alterar dados aluno
+$(document).ready(function(){
+	$('#altAluno').click(function(){
+		// enviar formulario sem dar refresh na pagina
+		$.ajax({
+			type: 'post',
+			url: 'php/altAluno.php',
+			data: $('#formAltAluno').serialize(),
+			success: function(data, status){
+				// cadastrou
+				if (data == "Dados alterados com sucesso!"){
+					alert(data);
+					// refresh na pagina
+					location.replace('professorMain.php');
+					
+				// erro na request
+				}else if(data == "Um erro inesperado aconteceu. Por favor, tente novamente."){
+					alert(data);
+					
+				// formulario preenchido incorretamente, lista quais erros foram cometidos
+				}else{
+					$('#erroMensagem').html(data);
+				}
+			},
+			error: function(data, status){
+				alert('error');
+			}
+		});
+	});
+});

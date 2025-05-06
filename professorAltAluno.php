@@ -3,13 +3,6 @@
 	session_start();
 	require "php/conexao.php";
 	$conn = conectar();
-	
-	$query = "SELECT * FROM professor WHERE cpf=?";
-	$stmt = $conn->prepare($query);
-	$stmt->bind_param("i", $_SESSION['cpf']);
-	$stmt->execute();
-	$result = $stmt->get_result();
-	$data = $result->fetch_assoc();
 
 ?>
 
@@ -79,8 +72,8 @@
 						  
 							<ul class="dropdown-menu">
 							
-								<li><a href="professorAltProf.php" class="dropdown-item active">Seus dados</a></li>
-								<li><a href="professorAltAluno.php" class="dropdown-item">Dados de aluno</a></li>
+								<li><a href="professorAltProf.php" class="dropdown-item">Seus dados</a></li>
+								<li><a href="professorAltAluno.php" class="dropdown-item active">Dados de aluno</a></li>
 								
 							</ul>
 						</li>
@@ -103,20 +96,46 @@
 			</div>
 		</nav>
 		
+		<!-- selecao de classe e aluno -->
+		<div class="container-fluid d-flex justify-content-evenly">
+			<div class="col-5">
+				<select name="escolherClasse" id="escolherClasse" class="form-select">
+					<?php
+						$query = "SELECT * FROM serie";
+						$result = $conn->query($query);
+						
+						echo "<option selected='selected' value=null disabled>Selecione uma classe</option>";
+					
+						while($row = $result->fetch_assoc()){
+							echo "<option value='".$row['classe']."'>".$row['classe']."</option>";
+						}
+					?>
+				</select>
+			</div>
+				
+			<div class="col-5">
+				<select name="escolherAluno" id="escolherAluno" class="form-select">
+					
+					
+					
+				</select>
+			</div>
+		</div>
+		
 		<!-- formulario -->
 		<div class="container-fluid d-flex justify-content-center">
-			<form class="col-10" id="formAltProf">
-							
+			<form class="col-10" id="formAltAluno">
+				
 				<!-- campos a serem preenchidos -->
 				<div class="row container-fluid d-flex justify-content-center">
 					<div class="mb-3 col-md-5">
 						<label for="cpf" class="form-label">CPF</label>
-						<input name="cpf" type="number" class="form-control" id="cpf" value="<?php echo $data['cpf']; ?>" disabled readonly>
+						<input name="cpf" type="number" class="form-control" id="cpf" value="" readonly>
 					</div>
 					
 					<div class="mb-3 col-md-5">
 						<label for="nome" class="form-label">Nome</label>
-						<input name="nome" type="text" class="form-control" id="nome" placeholder="<?php echo $data['nome']; ?>">
+						<input name="nome" type="text" class="form-control" id="nome" placeholder="">
 					</div>
 				</div>
 				
@@ -133,12 +152,12 @@
 				</div>
 				
 				<div class="row container-fluid d-flex justify-content-center">
-					<div class="mb-3 col-md-5">
+					<div class="mb-3 col-md-4">
 						<label for="nascimento" class="form-label">Nascimento</label>
 						<input name="nascimento" type="date" class="form-control" id="nascimento">
 					</div>
 					
-					<div class="mb-3 col-md-5">
+					<div class="mb-3 col-md-3">
 						<label for="genero" class="form-label">Gênero</label>
 						<select name="genero" id="genero" class="form-select">
 							<option value="M">Masculino</option>
@@ -146,11 +165,27 @@
 							<option value="O">Outro</option>
 						</select>
 					</div>
+					
+					<div class="mb-3 col-md-3">
+						<label for="classe" class="form-label">Série</label>
+						<select name="classe" id="classe" class="form-select">
+							<?php
+							
+								$query = "SELECT * FROM serie";
+								$result = $conn->query($query);
+								
+								while($row = $result->fetch_assoc()){
+									echo "<option value='".$row['classe']."'>".$row['classe']."</option>";
+								}
+							
+							?>
+						</select>
+					</div>
 				</div>
 				
 				<!-- botão pra alterar os dados -->
 				<div class="row container-fluid d-flex justify-content-center">
-					<button type="button" class="btn btn-primary col-10 col-lg-6" id="altProf">Alterar dados</button>
+					<button type="button" class="btn btn-primary col-10 col-lg-6" id="altAluno">Alterar dados</button>
 				</div>
 			</form>
 		</div>

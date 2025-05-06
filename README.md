@@ -20,3 +20,9 @@
 - Criação de sessões para uso de cookies
 - Melhoria na exibição de mensagens de erro
 - Limpeza de código (comentários, identação, exclusão de partes inutilizadas)
+
+## 05/05/2025
+- Mudança de dados cadastrais de professor (apenas dados do proprio usuario)
+- Mudança de dados cadastrais de aluno (permissao apenas para professores)
+- Mensagem de "bem-vindo" na página inicial após login
+- Adição de novos itens no menu de navegação (incompleto) para acessar as novas funcionalidades
