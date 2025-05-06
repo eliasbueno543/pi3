@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	require "php/conexao.php";
+	$conn = conectar();
 ?>
 
 <!doctype html>
@@ -37,13 +39,14 @@
     
 		<!-- barra de navegacao -->
 		<nav class="navbar navbar-expand-md sticky-top bg-dark" data-bs-theme="dark">
+			
 			<div class="container-fluid">
         
 				<!-- botao de colapso em telas menores -->
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navegacao" aria-controls="navegacao" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-          
+		  
 				<button type="button" class="btn btn-light order-md-last" id="userLogout">Sair</button>
         
 				<!-- a barra em si -->
@@ -61,6 +64,17 @@
             
 						<li class="nav-item">
 							<a href="professorMain.php" class="nav-link active" aria-current="page">Painel</a>
+						</li>
+						
+						<li class="nav-item dropdown">
+							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Alterar dados</a>
+						  
+							<ul class="dropdown-menu">
+							
+								<li><a href="professorAltProf.php" class="dropdown-item">Seus dados</a></li>
+								<li><a href="" class="dropdown-item">Dados de aluno</a></li>
+								
+							</ul>
 						</li>
             
 						<li class="nav-item dropdown">
@@ -80,6 +94,60 @@
         
 			</div>
 		</nav>
+		
+		<!-- bem vindo -->
+		<br>
+		<div class="container d-flex justify-content-center">
+			<div class="card col-12">
+				<div class="card-body fs-5 text-center">Bem-vindo(a), 
+				<?php
+					$query = "SELECT * FROM professor WHERE cpf=?";
+					$stmt = $conn->prepare($query);
+					$stmt->bind_param("i", $_SESSION['cpf']);
+					$stmt->execute();
+					$result = $stmt->get_result();
+					$data = $result->fetch_assoc();
+					
+					echo $data['nome'];
+				?>
+				</div>
+			</div>
+		</div>
+		<br>
+		
+		<!-- info -->
+		<div class="container d-block d-lg-flex justify-content-evenly">
+			<div class="card col-12 col-lg-5">
+				<!-- user info -->
+				<div class="card-body fs-2 text-start">
+					<?php
+						$query = "SELECT * FROM professor WHERE cpf=?";
+						$stmt = $conn->prepare($query);
+						$stmt->bind_param("i", $_SESSION['cpf']);
+						$stmt->execute();
+						$result = $stmt->get_result();
+						$data = $result->fetch_assoc();
+						$colNames = array_keys($data);
+						
+						foreach($colNames as $key=>$value){
+							if ($value != 'senha'){
+								echo "<span class='text-uppercase'>".$value.":</span> <span class='text-capitalize'>".$data[$value]."</span><br>";
+							}
+						}
+					?>
+				</div>
+			</div>
+			
+			<span class="d-block d-lg-none"><br></span>
+			
+			<div class="card col-12 col-lg-5">
+				<!-- outra info -->
+				<div class="card-body fs-2 text-start">
+					<p>data a ser adicionada no futuro aaaaaaaaaaaaaaaaa</p>
+				</div>
+			</div>
+		</div>
+		<br>
 
 		<!-- javascript, colocado no fim do body pra acelerar o carregamento da página -->
 		

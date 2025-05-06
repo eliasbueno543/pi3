@@ -96,6 +96,37 @@ $(document).ready(function(){
 	});
 });
 
+// alterar dados professor
+$(document).ready(function(){
+	$('#altProf').click(function(){
+		// enviar formulario sem dar refresh na pagina
+		$.ajax({
+			type: 'post',
+			url: 'php/altProf.php',
+			data: $('#formAltProf').serialize(),
+			success: function(data, status){
+				// cadastrou
+				if (data == "Dados alterados com sucesso!"){
+					alert(data);
+					// refresh na pagina
+					location.replace('professorMain.php');
+					
+				// erro na request
+				}else if(data == "Um erro inesperado aconteceu. Por favor, tente novamente."){
+					alert(data);
+					
+				// formulario preenchido incorretamente, lista quais erros foram cometidos
+				}else{
+					$('#erroMensagem').html(data);
+				}
+			},
+			error: function(data, status){
+				alert('error');
+			}
+		});
+	});
+});
+
 // cadastrar aluno
 $(document).ready(function(){
 	$('#cadAluno').click(function(){
@@ -126,3 +157,4 @@ $(document).ready(function(){
 		});
 	});
 });
+
