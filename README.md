@@ -26,3 +26,6 @@
 - Mudança de dados cadastrais de aluno (permissao apenas para professores)
 - Mensagem de "bem-vindo" na página inicial após login
 - Adição de novos itens no menu de navegação (incompleto) para acessar as novas funcionalidades
+
+## 06/05/2025
+- Sistema de cadastro e exibição de notas de alunos (funcionalidade apenas para professores)
