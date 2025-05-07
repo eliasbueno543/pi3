@@ -158,6 +158,116 @@ $(document).ready(function(){
 	});
 });
 
+// cadastrar nota de aluno selecionar aluno
+$(document).ready(function(){
+	// select num1 é ativado
+	var selOne = null;
+	$('#notaClasse').change(function(){
+		selOne = $('#notaClasse').find(":selected").val();
+		$.ajax({
+			type: 'post',
+			url: 'php/altAlunoNotaSelect.php',
+			data: {
+				selOne: selOne
+			},
+			success: function(data, status){
+				$('#notaAluno').html(data);
+				// alert(data);
+			},
+			error: function(data, status){
+				alert(data+status)
+			}
+		});
+	});
+	
+	// select num2 é ativado
+	var selTwo = null;
+	$('#notaAluno').change(function(){
+		selTwo = $('#notaAluno').find(":selected").val();
+		if (selTwo != null){
+			// alert(selTwo);
+			$.ajax({
+			type: 'post',
+			url: 'php/altAlunoNotaSelect.php',
+			data: {
+				selTwo: selTwo
+			},
+			success: function(data, status){
+				var alunoArray = JSON.parse(data);
+				//alert(alunoArray);
+				
+				$('#notaCpf').html(alunoArray['cpf']);
+				$('#notaNome').html(alunoArray['nome']);
+				$('#notaGenero').html(alunoArray['genero']);
+				$('#notaNascimento').html(alunoArray['nascimento']);
+				$('#nota2Classe').html(alunoArray['classe']);
+				
+				document.getElementById('nota2Cpf').value = alunoArray['cpf'];
+				
+			},
+			error: function(data, status){
+				alert(data+status)
+			}
+		});
+		}
+	});
+	
+	// select 3, apenas mostrando
+	$('#mostrarNota').click(function(){
+		//alert();
+		$.ajax({
+			type: 'post',
+			url: 'php/profMostrarNota.php',
+			data: {
+				cpf: document.getElementById('nota2Cpf').value,
+				materia: document.getElementById('notaMateria').value
+			},
+			success: function(data,status){
+				// var notaArray = JSON.parse(data);
+				// alert(notaArray);
+				//alert(data);
+				$('#visualNota').html(data);
+			},
+			error: function(data,status){
+				alert('error: '+data);
+			}
+		});
+	});
+});
+
+// cadastrar nota de aluno
+$(document).ready(function(){
+	// apertar botao
+	$('#notaCad').click(function(){
+		//alert();
+		
+		$.ajax({
+			type: 'post',
+			url: 'php/cadNota.php',
+			data: $('#formNota').serialize(),
+			success: function(data,status){
+				// cadastrou
+				if (data == "Nota atribuída ao aluno!"){
+					alert(data);
+					// refresh na pagina
+					location.replace('professorCadNota.php');
+					
+				// erro na request
+				}else if(data == "Um erro inesperado aconteceu. Por favor, tente novamente."){
+					alert(data);
+					
+				// formulario preenchido incorretamente, lista quais erros foram cometidos
+				}else{
+					$('#erroMensagem').html(data);
+				}
+			},
+			error: function(data,status){
+				alert('error: '+data);
+			}
+		})
+	});
+});
+
 // alterar dados aluno selecionar aluno
 $(document).ready(function(){
 	// select num1 é ativado

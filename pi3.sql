@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2025 at 01:44 AM
+-- Generation Time: May 07, 2025 at 05:07 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,56 @@ CREATE TABLE `aluno` (
 --
 
 INSERT INTO `aluno` (`cpf`, `senha`, `nome`, `nascimento`, `genero`, `classe`) VALUES
+(3, 0x243279243130246f4666794e636a4a7959356270494b69344f7458594f524c6672503754586f2e4162747778537a38394a486a705058667246524165, 0x616c756e6f747265737465737465, '2025-05-06', 'M', 'E2-B'),
+(4, 0x243279243130244c6f3645546c345831513067434c7831432e35754d756f36544a63385954426e50686f624d664c7642656e6e37577a68703941304f, 0x416c756e6f2054657374652034, '2025-05-08', 'O', 'E2-A'),
+(12, 0x24327924313024444e6d343953784153356b705971763176366769552e78425630454a694f424b7a54375445784c6a762f4b7a7162462e376b717561, 0x416c756e6f20546573746520446f6973, '2025-05-05', 'M', '1-A'),
 (10000000000, 0x243279243130247172347068334173786d53684c49346e565574447675636f3438526c6c723657317135337636735938682e776974504c6456726a57, 0x416c756e6f205465737465, '2021-08-30', 'F', 'E2-A');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `materia`
+--
+
+CREATE TABLE `materia` (
+  `nome` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `materia`
+--
+
+INSERT INTO `materia` (`nome`) VALUES
+('ciência'),
+('geografia'),
+('história'),
+('matemática'),
+('português');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nota`
+--
+
+CREATE TABLE `nota` (
+  `id` int(150) NOT NULL,
+  `aluno` bigint(11) NOT NULL,
+  `materia` varchar(150) NOT NULL,
+  `bimestre` set('1','2','3','4') NOT NULL,
+  `valor` int(2) NOT NULL,
+  `profResponsavel` bigint(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `nota`
+--
+
+INSERT INTO `nota` (`id`, `aluno`, `materia`, `bimestre`, `valor`, `profResponsavel`) VALUES
+(3, 12, 'ciência', '1', 0, 1),
+(4, 12, 'ciência', '1', 5, 1),
+(5, 12, 'ciência', '2', 4, 1),
+(6, 12, 'geografia', '1', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -62,7 +111,7 @@ CREATE TABLE `professor` (
 --
 
 INSERT INTO `professor` (`cpf`, `senha`, `nome`, `nascimento`, `genero`) VALUES
-(1, 0x24327924313024387438362f39637833444677467532476e762e6c382e786e5631452e69414331427a75367a4f63734a544d2e5171754b2f6a2e5432, 0x61646d, '2025-05-03', 'O');
+(1, 0x243279243130244b5538755635353759496a6478384462475579583865526255706f614968785a4c5a6453536a3456657a6a516c5a77374243443679, 0x61646d, '2025-05-01', 'M');
 
 -- --------------------------------------------------------
 
@@ -106,6 +155,21 @@ ALTER TABLE `aluno`
   ADD KEY `aluno_serie` (`classe`);
 
 --
+-- Indexes for table `materia`
+--
+ALTER TABLE `materia`
+  ADD PRIMARY KEY (`nome`);
+
+--
+-- Indexes for table `nota`
+--
+ALTER TABLE `nota`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `alunoCpf` (`aluno`),
+  ADD KEY `profCpf` (`profResponsavel`),
+  ADD KEY `materia` (`materia`);
+
+--
 -- Indexes for table `professor`
 --
 ALTER TABLE `professor`
@@ -118,6 +182,16 @@ ALTER TABLE `serie`
   ADD PRIMARY KEY (`classe`);
 
 --
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `nota`
+--
+ALTER TABLE `nota`
+  MODIFY `id` int(150) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -126,6 +200,14 @@ ALTER TABLE `serie`
 --
 ALTER TABLE `aluno`
   ADD CONSTRAINT `aluno_serie` FOREIGN KEY (`classe`) REFERENCES `serie` (`classe`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `nota`
+--
+ALTER TABLE `nota`
+  ADD CONSTRAINT `alunoCpf` FOREIGN KEY (`aluno`) REFERENCES `aluno` (`cpf`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `materia` FOREIGN KEY (`materia`) REFERENCES `materia` (`nome`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `profCpf` FOREIGN KEY (`profResponsavel`) REFERENCES `professor` (`cpf`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
