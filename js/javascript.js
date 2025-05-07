@@ -235,6 +235,30 @@ $(document).ready(function(){
 	});
 });
 
+// aluno mostrar Nota
+$(document).ready(function(){
+	$('#mostrarAlunoNota').click(function(){
+		//alert();
+		$.ajax({
+			type: 'post',
+			url: 'php/alunoMostrarNota.php',
+			data: {
+				materia: document.getElementById('notaAlunoMateria').value
+			},
+			success: function(data,status){
+				// var notaArray = JSON.parse(data);
+				// alert(notaArray);
+				// alert(data);
+				// alert();
+				$('#visualNota').html(data);
+			},
+			error: function(data,status){
+				alert('error: '+data);
+			}
+		});
+	});
+});
+
 // cadastrar nota de aluno
 $(document).ready(function(){
 	// apertar botao
@@ -334,6 +358,37 @@ $(document).ready(function(){
 					alert(data);
 					// refresh na pagina
 					location.replace('professorMain.php');
+					
+				// erro na request
+				}else if(data == "Um erro inesperado aconteceu. Por favor, tente novamente."){
+					alert(data);
+					
+				// formulario preenchido incorretamente, lista quais erros foram cometidos
+				}else{
+					$('#erroMensagem').html(data);
+				}
+			},
+			error: function(data, status){
+				alert('error');
+			}
+		});
+	});
+});
+
+// aluno alterar dados aluno
+$(document).ready(function(){
+	$('#alunoAltAluno').click(function(){
+		// enviar formulario sem dar refresh na pagina
+		$.ajax({
+			type: 'post',
+			url: 'php/alunoAltAluno.php',
+			data: $('#formAltAluno').serialize(),
+			success: function(data, status){
+				// cadastrou
+				if (data == "Dados alterados com sucesso!"){
+					alert(data);
+					// refresh na pagina
+					location.replace('alunoMain.php');
 					
 				// erro na request
 				}else if(data == "Um erro inesperado aconteceu. Por favor, tente novamente."){
