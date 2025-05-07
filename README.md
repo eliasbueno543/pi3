@@ -29,3 +29,9 @@
 
 ## 06/05/2025
 - Sistema de cadastro e exibição de notas de alunos (funcionalidade apenas para professores)
+- Adição de novos itens no menu de navegação (incompleto) para acessar as novas funcionalidades
+
+## 07/05/2025
+- Sistema de exibição de notas de aluno (funcionalidade para alunos)
+- Sistema de troca de senha de alunos (funcionalidade para alunos)
+- Adição de novos itens no menu de navegação (incompleto) para acessar as novas funcionalidades
