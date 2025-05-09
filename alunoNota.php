@@ -1,8 +1,6 @@
 <?php
 
 	session_start();
-	require "php/conexao.php";
-	$conn = conectar();
 
 ?>
 
@@ -26,7 +24,12 @@
 
 
 	<body>
-	  
+	
+		<!-- logo -->
+		<div class="container d-flex justify-content-center">
+			<img src="img/logo.png" class="col-1">
+		</div>
+		
 		<!-- barra de navegacao -->
 		<nav class="navbar navbar-expand-md sticky-top bg-dark" data-bs-theme="dark">
 			<div class="container-fluid">
@@ -44,13 +47,6 @@
 					<ul class="navbar-nav navbar-nav-scroll col-md-10 justify-content-md-evenly" style="--bs-scroll-height: 100px;">
 					
 						<!-- itens -->
-						
-						<!-- exemplo de item puro
-						<li class="nav-item">
-							<a href="#" class="nav-link active" aria-current="page">Wow</a>
-						</li>
-						-->
-						
 						<li class="nav-item">
 							<a href="alunoMain.php" class="nav-link" aria-current="page">Painel</a>
 						</li>
@@ -63,41 +59,6 @@
 							<a href="alunoAltAluno.php" class="nav-link" aria-current="page">Mudar dados</a>
 						</li>
 					
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Aluno</a>
-						  
-							<ul class="dropdown-menu">
-							
-								<li><a href="#" class="dropdown-item">Boletim</a></li>
-								<li><a href="#" class="dropdown-item">Dados pessoais</a></li>
-								<li><a href="#" class="dropdown-item">Professores</a></li>
-							
-							</ul>
-						</li>
-					
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Biblioteca</a>
-						  
-							<ul class="dropdown-menu">
-							
-								<li><a href="#" class="dropdown-item">Arquivos</a></li>
-								<li><a href="#" class="dropdown-item">Material didático</a></li>
-							
-							</ul>
-						</li>
-					
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Notas</a>
-						  
-							<ul class="dropdown-menu">
-							
-								<li><a href="#" class="dropdown-item">Atividades e avaliações</a></li>
-								<li><a href="#" class="dropdown-item">Cronograma</a></li>
-								<li><a href="#" class="dropdown-item">Presença</a></li>
-							
-							</ul>
-						</li>
-					
 					</ul>
 				  
 				</div>
@@ -106,23 +67,14 @@
 		</nav>
 		
 		<!-- info -->
-		<div class="container d-block d-lg-flex justify-content-evenly">
-			<div class="card col-12 col-lg-5">
-				<!-- user info -->
-				<div class="card-body fs-2 text-start">
-					<span class='text-uppercase'>cpf: </span><span class='text-uppercase' name="notaCpf" id="notaCpf">?</span><br>
-					<span class='text-uppercase'>nome: </span><span class='text-uppercase' name="notaNome" id="notaNome">?</span><br>
-					<span class='text-uppercase'>nascimento: </span><span class='text-uppercase' name="notaNascimento" id="notaNascimento">?</span><br>
-					<span class='text-uppercase'>gênero: </span><span class='text-uppercase' name="notaGenero" id="notaGenero">?</span><br>
-					<span class='text-uppercase'>classe: </span><span class='text-uppercase' name="nota2Classe" id="nota2Classe">?</span><br>
-				</div>
-			</div>
+		<div class="container d-block d-lg-flex justify-content-evenly mt-3 mb-3 form-control">
+			<div class="col-12 col-lg-5 mb-3 mt-3">
 			
-			<span class="d-block d-lg-none"><br></span>
-			
-			<div class="col-12 col-lg-5">
 				<select name="notaAlunoMateria" id="notaAlunoMateria" class="form-select mb-3">
 					<?php
+					
+						require "php/conexao.php";
+						$conn = conectar();
 						$query = "SELECT * FROM materia";
 						$result = $conn->query($query);
 						
@@ -135,22 +87,26 @@
 				</select>
 				
 				<!-- botão -->
-				<div class="row container-fluid d-flex justify-content-center">
+				<div class="row container-fluid d-flex justify-content-center mb-3">
 					<button type="button" class="btn btn-primary col-10 col-lg-6" id="mostrarAlunoNota">Mostrar notas</button>
 				</div>
 				
-				<!-- notas -->
+				<!-- nota media -->
 				<div class="col-12 form-control">
-					<div id="visualNota"></div>
+					<div class="text-start fs-4 font-monospace" id="notaTotal"></div>
+				</div>
+				
+			</div>
+			
+			<!-- notas -->
+			<div class="col-12 col-lg-5 mt-3">
+				<div class="col-12 form-control mb-3">
+					<div class="text-start fs-4 font-monospace" id="visualNota"></div>
 				</div>
 			</div>
 		</div>
-		
-		<!-- erros de formulario -->
-		<p class="" id="erroMensagem"></p>
 
 		<!-- javascript, colocado no fim do body pra acelerar o carregamento da página -->
-		
 		<!-- bootstrap js -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 	

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08/05/2025 às 01:55
+-- Tempo de geração: 09/05/2025 às 05:03
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -90,7 +90,13 @@ INSERT INTO `nota` (`id`, `aluno`, `materia`, `bimestre`, `valor`, `profResponsa
 (3, 12, 'ciência', '1', 0, 1),
 (4, 12, 'ciência', '1', 5, 1),
 (5, 12, 'ciência', '2', 4, 1),
-(6, 12, 'geografia', '1', 3, 1);
+(7, 12, 'ciência', '1', 10, 1),
+(8, 12, 'ciência', '1', 8, 1),
+(9, 12, 'ciência', '1', 7, 1),
+(12, 12, 'história', '3', 10, 1),
+(13, 12, 'matemática', '3', 9, 1),
+(14, 12, 'português', '3', 6, 1),
+(16, 12, 'geografia', '1', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -189,7 +195,7 @@ ALTER TABLE `serie`
 -- AUTO_INCREMENT de tabela `nota`
 --
 ALTER TABLE `nota`
-  MODIFY `id` int(150) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(150) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restrições para tabelas despejadas

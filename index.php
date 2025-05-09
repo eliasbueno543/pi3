@@ -20,13 +20,6 @@
 
 	<body>
 	  
-	  <!-- teste de dimensionamento
-		<div class="row">
-			<div class="col-7 ye"><h1>amarelo</h1></div>
-			<div class="col-5 re"><h1>vermelho</h1></div>
-		</div>
-		-->
-		
 		<!-- logo -->
 		<div class="container d-flex justify-content-center">
 			<img src="img/logo.png" class="col-1">
@@ -36,7 +29,7 @@
 		<div class="container">
 		  
 			<!-- colapsar o fomulario de login -->
-			<div class="accordion" id="mostrarForm">
+			<div class="accordion mb-3" id="mostrarForm">
 			
 				<div class="accordion-item">
 			  
@@ -45,7 +38,7 @@
 					
 						<!-- deixar o formato e texto dos botões responsívos ao tamanho do display -->
 						<!-- os botões fazem o formulario de login aparecer, apenas um a qualquer momento-->
-						<div class="d-grid gap-2 d-sm-flex justify-content-sm-evenly text-center">
+						<div class="d-grid gap-2 d-sm-flex justify-content-sm-evenly text-center mt-3 mb-3">
 				
 							<button type="button" class="btn btn-dark col-10 mx-auto col-sm-5" data-bs-toggle="collapse" data-bs-target="#loginProf" aria-expanded="false" aria-controls="loginProf">
 								<h1><i class="bi bi-book-half"></i>
@@ -64,6 +57,7 @@
 					<!-- formulatio de login professor -->
 					<div id="loginProf" class="accordion-collapse collapse" data-bs-parent="#mostrarForm">
 					
+						<!-- sistema de "dropdown" do form de login -->
 						<div class="accordion-body">
 					  
 							<!-- professor -->
@@ -71,12 +65,12 @@
 							
 								<!-- campos de texto -->
 								<div class="mb-3">
-									<label for="professorCpf" class="form-label">CPF</label>
+									<label for="professorCpf" class="form-label">CPF do Professor</label>
 									<input name="professorCpf" type="number" class="form-control" id="professorCpf">
 								</div>
 								
-								<div class="mb-3">
-									<label for="professorSenha" class="form-label">Senha</label>
+								<div class="mb-4">
+									<label for="professorSenha" class="form-label">Senha do Professor</label>
 									<input name="professorSenha" type="password" class="form-control" id="professorSenha">
 								</div>
 								
@@ -84,7 +78,9 @@
 								<input type="hidden" name="action" id="action" value="loginProfessor">
 								
 								<!-- botão pra logar -->
-								<button type="button" class="btn btn-primary" id="entrarProf">Entrar como professor</button>
+								<div class="container d-flex justify-content-center mb-2">
+									<button type="button" class="btn btn-primary col-9" id="entrarProf">Entrar como professor</button>
+								</div>
 								
 							</form>
 						</div>
@@ -94,6 +90,7 @@
 					<!-- formulatio de login aluno -->
 					<div id="loginAluno" class="accordion-collapse collapse" data-bs-parent="#mostrarForm">
 					
+						<!-- sistema de "dropdown" do form de login -->
 						<div class="accordion-body">
 					  
 							<!-- aluno -->
@@ -101,12 +98,12 @@
 							
 								<!-- campos de texto -->
 								<div class="mb-3">
-									<label for="alunoCpf" class="form-label">CPF</label>
+									<label for="alunoCpf" class="form-label">CPF do Aluno</label>
 									<input name="alunoCpf" type="number" class="form-control" id="alunoCpf">
 								</div>
 								
-								<div class="mb-3">
-									<label for="alunoSenha" class="form-label">Senha</label>
+								<div class="mb-4">
+									<label for="alunoSenha" class="form-label">Senha do Aluno</label>
 									<input name="alunoSenha" type="password" class="form-control" id="alunoSenha">
 								</div>
 								
@@ -114,8 +111,12 @@
 								<input type="hidden" name="action" value="loginAluno">
 								
 								<!-- botão pra logar -->
-								<button type="button" class="btn btn-primary" id="entrarAluno">Entrar como aluno</button>
+								<div class="container d-flex justify-content-center mb-2">
+									<button type="button" class="btn btn-primary col-9" id="entrarAluno">Entrar como aluno</button>
+								</div>
+								
 							</form>
+							
 						</div>
 					  
 					</div>
@@ -124,13 +125,14 @@
 			  
 			</div>
 		
-		<!-- alert em caso de erro de login -->
-		<p class="" id="erroMensagem"></p>
+			<!-- alert em caso de erro de login -->
+			<div class="form-control" id="erro">
+				<p class="mt-3 text-center fs-4 fw-bolder" id="erroMensagem"></p>
+			</div>
 			
 		</div>
 	  
 		<!-- javascript, colocado no fim do body pra acelerar o carregamento da página -->
-		
 		<!-- bootstrap js -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 	

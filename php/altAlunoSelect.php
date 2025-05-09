@@ -6,7 +6,7 @@
 	// verificar primeiro select
 	if(isset($_POST['selOne']) && !isset($_POST['selTwo'])){
 		$selOne = $_POST['selOne'];
-		$selOneReturn = "<option selected='selected' value=null disabled>Selecione uma classe</option>\n";
+		$selOneReturn = "<option selected='selected' value=null disabled>Selecione um aluno</option>\n";
 		
 		$query = "SELECT cpf,nome FROM aluno WHERE classe=?";
 		$stmt = $conn->prepare($query);

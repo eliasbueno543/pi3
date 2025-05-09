@@ -1,5 +1,4 @@
 <?php
-
 	// detectar a sessão
 	session_start();
 	

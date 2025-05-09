@@ -23,13 +23,6 @@
 
 	<body>
 	  
-		<!-- teste de dimensionamento
-			<div class="row">
-			  <div class="col-7 ye"><h1>amarelo</h1></div>
-			  <div class="col-5 re"><h1>vermelho</h1></div>
-			</div>
-		-->
-    
 		<!-- logo -->
 		<div class="container d-flex justify-content-center">
 			<img src="img/logo.png" class="col-1">
@@ -52,13 +45,6 @@
 					<ul class="navbar-nav navbar-nav-scroll col-md-10 justify-content-md-evenly" style="--bs-scroll-height: 100px;">
 					
 						<!-- itens -->
-						
-						<!-- exemplo de item puro
-						<li class="nav-item">
-							<a href="#" class="nav-link active" aria-current="page">Wow</a>
-						</li>
-						-->
-						
 						<li class="nav-item">
 							<a href="alunoMain.php" class="nav-link active" aria-current="page">Painel</a>
 						</li>
@@ -66,40 +52,9 @@
 						<li class="nav-item">
 							<a href="alunoNota.php" class="nav-link" aria-current="page">Notas</a>
 						</li>
-					
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Aluno</a>
-						  
-							<ul class="dropdown-menu">
-							
-								<li><a href="#" class="dropdown-item">Boletim</a></li>
-								<li><a href="#" class="dropdown-item">Dados pessoais</a></li>
-								<li><a href="#" class="dropdown-item">Professores</a></li>
-							
-							</ul>
-						</li>
-					
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Biblioteca</a>
-						  
-							<ul class="dropdown-menu">
-							
-								<li><a href="#" class="dropdown-item">Arquivos</a></li>
-								<li><a href="#" class="dropdown-item">Material didático</a></li>
-							
-							</ul>
-						</li>
-					
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Notas</a>
-						  
-							<ul class="dropdown-menu">
-							
-								<li><a href="#" class="dropdown-item">Atividades e avaliações</a></li>
-								<li><a href="#" class="dropdown-item">Cronograma</a></li>
-								<li><a href="#" class="dropdown-item">Presença</a></li>
-							
-							</ul>
+						
+						<li class="nav-item">
+							<a href="alunoAltAluno.php" class="nav-link" aria-current="page">Mudar dados</a>
 						</li>
 					
 					</ul>
@@ -108,9 +63,55 @@
 			
 			</div>
 		</nav>
+		
+		<!-- bem vindo -->
+		<div class="container d-flex justify-content-center mb-3 mt-3">
+			<div class="card col-12">
+				<div class="card-body fs-5 text-center">Bem-vindo(a),
+				<span class="text-capitalize">
+				<?php
+					require 'php/conexao.php';
+					$conn = conectar();
+					
+					$query = "SELECT * FROM aluno WHERE cpf=?";
+					$stmt = $conn->prepare($query);
+					$stmt->bind_param("i", $_SESSION['cpf']);
+					$stmt->execute();
+					$result = $stmt->get_result();
+					$data = $result->fetch_assoc();
+					
+					echo $data['nome'];
+				?>
+				</span>
+				</div>
+			</div>
+		</div>
+		
+		<!-- info -->
+		<div class="container d-block d-lg-flex justify-content-evenly mb-3">
+			<div class="card col-12 col-lg-5">
+				<!-- user info -->
+				<div class="card-body fs-2 text-start">
+					<?php
+						$query = "SELECT * FROM aluno WHERE cpf=?";
+						$stmt = $conn->prepare($query);
+						$stmt->bind_param("i", $_SESSION['cpf']);
+						$stmt->execute();
+						$result = $stmt->get_result();
+						$data = $result->fetch_assoc();
+						$colNames = array_keys($data);
+						
+						foreach($colNames as $key=>$value){
+							if ($value != 'senha'){
+								echo "<span class='text-uppercase'>".$value.":</span> <span class='text-capitalize'>".$data[$value]."</span><br>";
+							}
+						}
+					?>
+				</div>
+			</div>
+		</div>
 
 		<!-- javascript, colocado no fim do body pra acelerar o carregamento da página -->
-		
 		<!-- bootstrap js -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 	

@@ -1,7 +1,5 @@
 <?php
 	session_start();
-	require "php/conexao.php";
-	$conn = conectar();
 ?>
 
 <!doctype html>
@@ -25,13 +23,6 @@
 
 	<body>
 	  
-		<!-- teste de dimensionamento
-		<div class="row">
-			<div class="col-7 ye"><h1>amarelo</h1></div>
-			<div class="col-5 re"><h1>vermelho</h1></div>
-		</div>
-		-->
-		
 		<!-- logo -->
 		<div class="container d-flex justify-content-center">
 			<img src="img/logo.png" class="col-1">
@@ -53,14 +44,6 @@
 				<div class="collapse navbar-collapse justify-content-md-center" id="navegacao">
 				  
 					<ul class="navbar-nav navbar-nav-scroll col-md-10 justify-content-md-evenly" style="--bs-scroll-height: 100px;">
-            
-						<!-- itens -->
-						
-						<!-- exemplo de item puro
-						<li class="nav-item">
-						  <a href="#" class="nav-link active" aria-current="page">Wow</a>
-						</li>
-						-->
             
 						<li class="nav-item">
 							<a href="professorMain.php" class="nav-link active" aria-current="page">Painel</a>
@@ -107,11 +90,14 @@
 		</nav>
 		
 		<!-- bem vindo -->
-		<br>
-		<div class="container d-flex justify-content-center">
+		<div class="container d-flex justify-content-center mb-3 mt-3">
 			<div class="card col-12">
-				<div class="card-body fs-5 text-center">Bem-vindo(a), 
+				<div class="card-body fs-5 text-center">Bem-vindo(a),
+				<span class="text-capitalize">
 				<?php
+					require 'php/conexao.php';
+					$conn = conectar();
+					
 					$query = "SELECT * FROM professor WHERE cpf=?";
 					$stmt = $conn->prepare($query);
 					$stmt->bind_param("i", $_SESSION['cpf']);
@@ -121,13 +107,13 @@
 					
 					echo $data['nome'];
 				?>
+				</span>
 				</div>
 			</div>
 		</div>
-		<br>
 		
 		<!-- info -->
-		<div class="container d-block d-lg-flex justify-content-evenly">
+		<div class="container d-block d-lg-flex justify-content-evenly mb-3">
 			<div class="card col-12 col-lg-5">
 				<!-- user info -->
 				<div class="card-body fs-2 text-start">
@@ -148,20 +134,9 @@
 					?>
 				</div>
 			</div>
-			
-			<span class="d-block d-lg-none"><br></span>
-			
-			<div class="card col-12 col-lg-5">
-				<!-- outra info -->
-				<div class="card-body fs-2 text-start">
-					<p>data a ser adicionada no futuro aaaaaaaaaaaaaaaaa</p>
-				</div>
-			</div>
 		</div>
-		<br>
 
 		<!-- javascript, colocado no fim do body pra acelerar o carregamento da página -->
-		
 		<!-- bootstrap js -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 	
@@ -169,7 +144,7 @@
 		<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 		
 		<!-- js manual -->
-		<script src="js/javascript.js"></script></script>
+		<script src="js/javascript.js"></script>
 
 	</body>
 </html>

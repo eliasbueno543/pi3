@@ -27,6 +27,11 @@
 
 	<body>
 	  
+		<!-- logo -->
+		<div class="container d-flex justify-content-center">
+			<img src="img/logo.png" class="col-1">
+		</div>
+		
 		<!-- barra de navegacao -->
 		<nav class="navbar navbar-expand-md sticky-top bg-dark" data-bs-theme="dark">
 			<div class="container-fluid">
@@ -44,13 +49,6 @@
 					<ul class="navbar-nav navbar-nav-scroll col-md-10 justify-content-md-evenly" style="--bs-scroll-height: 100px;">
 					
 						<!-- itens -->
-						
-						<!-- exemplo de item puro
-						<li class="nav-item">
-							<a href="#" class="nav-link active" aria-current="page">Wow</a>
-						</li>
-						-->
-						
 						<li class="nav-item">
 							<a href="alunoMain.php" class="nav-link" aria-current="page">Painel</a>
 						</li>
@@ -63,41 +61,6 @@
 							<a href="alunoAltAluno.php" class="nav-link active" aria-current="page">Mudar dados</a>
 						</li>
 					
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Aluno</a>
-						  
-							<ul class="dropdown-menu">
-							
-								<li><a href="#" class="dropdown-item">Boletim</a></li>
-								<li><a href="#" class="dropdown-item">Dados pessoais</a></li>
-								<li><a href="#" class="dropdown-item">Professores</a></li>
-							
-							</ul>
-						</li>
-					
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Biblioteca</a>
-						  
-							<ul class="dropdown-menu">
-							
-								<li><a href="#" class="dropdown-item">Arquivos</a></li>
-								<li><a href="#" class="dropdown-item">Material didático</a></li>
-							
-							</ul>
-						</li>
-					
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Notas</a>
-						  
-							<ul class="dropdown-menu">
-							
-								<li><a href="#" class="dropdown-item">Atividades e avaliações</a></li>
-								<li><a href="#" class="dropdown-item">Cronograma</a></li>
-								<li><a href="#" class="dropdown-item">Presença</a></li>
-							
-							</ul>
-						</li>
-					
 					</ul>
 				  
 				</div>
@@ -107,8 +70,8 @@
 		
 		<!-- info -->
 		<!-- formulario -->
-		<div class="container-fluid d-flex justify-content-center">
-			<form class="col-10" id="formAltAluno">
+		<div class="container-fluid d-flex justify-content-center col-11 col-lg-10">
+			<form class="form-control mb-3 mt-3" id="formAltAluno">
 				
 				<!-- campos a serem preenchidos -->
 				<div class="row container-fluid d-flex justify-content-center">
@@ -146,17 +109,20 @@
 				</div>
 				
 				<!-- botão pra alterar os dados -->
-				<div class="row container-fluid d-flex justify-content-center">
+				<div class="row container-fluid d-flex justify-content-center mb-3 mt-2">
 					<button type="button" class="btn btn-primary col-10 col-lg-6" id="alunoAltAluno">Alterar dados</button>
 				</div>
 			</form>
 		</div>
 		
-		<!-- erros de formulario -->
-		<p class="" id="erroMensagem"></p>
+		<!-- alert em caso de preenchimento incorreto -->
+		<div class="container-fluid d-flex justify-content-center col-11 col-lg-10">
+			<div class="form-control" id="erro">
+				<p class="mt-3 text-center fs-4 fw-bolder" id="erroMensagem"></p>
+			</div>
+		</div>
 
 		<!-- javascript, colocado no fim do body pra acelerar o carregamento da página -->
-		
 		<!-- bootstrap js -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 	

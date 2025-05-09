@@ -35,3 +35,8 @@
 - Sistema de exibição de notas de aluno (funcionalidade para alunos)
 - Sistema de troca de senha de alunos (funcionalidade para alunos)
 - Adição de novos itens no menu de navegação (incompleto) para acessar as novas funcionalidades
+
+## 08/05/2025
+- Formatação e padronização de interface
+- Adição de calculo de média bimestral
+- Manutenção geral de código

@@ -11,7 +11,7 @@ $(document).ready(function(){
 			success: function(data, status){
 				// detectar dados incorretos fornecidos
 				if (data == false){
-					$('#erroMensagem').html("CPF ou SENHA incorretos!")
+					$('#erroMensagem').html("CPF ou SENHA incorretos!");
 				}else{
 					// alert(data); // teste
 					// enviar para página portal correta
@@ -214,7 +214,7 @@ $(document).ready(function(){
 	
 	// select 3, apenas mostrando
 	$('#mostrarNota').click(function(){
-		//alert();
+		//alert(document.getElementById('notaMateria').value);
 		$.ajax({
 			type: 'post',
 			url: 'php/profMostrarNota.php',
@@ -223,10 +223,10 @@ $(document).ready(function(){
 				materia: document.getElementById('notaMateria').value
 			},
 			success: function(data,status){
-				// var notaArray = JSON.parse(data);
-				// alert(notaArray);
-				//alert(data);
-				$('#visualNota').html(data);
+				var notaArray = JSON.parse(data);
+				// alert(notaArray[0]);
+				$('#visualNota').html(notaArray[0]);
+				$('#notaTotal').html(notaArray[1]);
 			},
 			error: function(data,status){
 				alert('error: '+data);
@@ -238,7 +238,7 @@ $(document).ready(function(){
 // aluno mostrar Nota
 $(document).ready(function(){
 	$('#mostrarAlunoNota').click(function(){
-		//alert();
+		// alert(document.getElementById('notaAlunoMateria').value);
 		$.ajax({
 			type: 'post',
 			url: 'php/alunoMostrarNota.php',
@@ -246,11 +246,12 @@ $(document).ready(function(){
 				materia: document.getElementById('notaAlunoMateria').value
 			},
 			success: function(data,status){
-				// var notaArray = JSON.parse(data);
-				// alert(notaArray);
+				var notaArray = JSON.parse(data);
+				// alert(notaArray[0]);
 				// alert(data);
 				// alert();
-				$('#visualNota').html(data);
+				$('#visualNota').html(notaArray[0]);
+				$('#notaTotal').html(notaArray[1]);
 			},
 			error: function(data,status){
 				alert('error: '+data);
