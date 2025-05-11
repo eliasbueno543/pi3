@@ -40,3 +40,8 @@
 - Formatação e padronização de interface
 - Adição de calculo de média bimestral
 - Manutenção geral de código
+
+## 11/05/2025
+- Comentários no código
+- Limpeza de código
+- Correção nos valores do banco de dados para melhoria da interface de usuário

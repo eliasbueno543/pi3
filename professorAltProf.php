@@ -4,6 +4,7 @@
 	require "php/conexao.php";
 	$conn = conectar();
 	
+	// query pra permitir que o prof possa apenas alterar a si propria
 	$query = "SELECT * FROM professor WHERE cpf=?";
 	$stmt = $conn->prepare($query);
 	$stmt->bind_param("i", $_SESSION['cpf']);
@@ -19,7 +20,7 @@
 	
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<title>PORTAL DO ALUNO - Colégio Galileu Caçapava</title>
+  	<title>Alterar dados - PORTAL DO PROFESSOR Colégio Galileu Caçapava</title>
 
   	<!-- bootstrap css e icons -->
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -49,6 +50,7 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 		  
+				<!-- botão de lougout -->
 				<button type="button" class="btn btn-light order-md-last" id="userLogout">Sair</button>
         
 				<!-- a barra em si -->
@@ -87,7 +89,7 @@
 						  
 							<ul class="dropdown-menu">
 							
-								<li><a href="professorNota.php" class="dropdown-item">Vizualizar</a></li>
+								<li><a href="professorNota.php" class="dropdown-item">Visualizar</a></li>
 								<li><a href="professorCadNota.php" class="dropdown-item">Registrar</a></li>
 								
 							</ul>

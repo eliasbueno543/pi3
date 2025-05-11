@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 09/05/2025 às 05:03
+-- Tempo de geração: 10/05/2025 às 04:46
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -61,11 +61,11 @@ CREATE TABLE `materia` (
 --
 
 INSERT INTO `materia` (`nome`) VALUES
-('ciência'),
+('ciencia'),
 ('geografia'),
-('história'),
-('matemática'),
-('português');
+('historia'),
+('matematica'),
+('portugues');
 
 -- --------------------------------------------------------
 
@@ -87,15 +87,15 @@ CREATE TABLE `nota` (
 --
 
 INSERT INTO `nota` (`id`, `aluno`, `materia`, `bimestre`, `valor`, `profResponsavel`) VALUES
-(3, 12, 'ciência', '1', 0, 1),
-(4, 12, 'ciência', '1', 5, 1),
-(5, 12, 'ciência', '2', 4, 1),
-(7, 12, 'ciência', '1', 10, 1),
-(8, 12, 'ciência', '1', 8, 1),
-(9, 12, 'ciência', '1', 7, 1),
-(12, 12, 'história', '3', 10, 1),
-(13, 12, 'matemática', '3', 9, 1),
-(14, 12, 'português', '3', 6, 1),
+(3, 12, 'ciencia', '1', 0, 1),
+(4, 12, 'ciencia', '1', 5, 1),
+(5, 12, 'ciencia', '2', 4, 1),
+(7, 12, 'ciencia', '1', 10, 1),
+(8, 12, 'ciencia', '1', 8, 1),
+(9, 12, 'ciencia', '1', 7, 1),
+(12, 12, 'historia', '3', 10, 1),
+(13, 12, 'matematica', '3', 9, 1),
+(14, 12, 'portugues', '3', 6, 1),
 (16, 12, 'geografia', '1', 10, 1);
 
 -- --------------------------------------------------------

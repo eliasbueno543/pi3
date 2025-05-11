@@ -4,7 +4,7 @@
 	
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>PORTAL - Colégio Galileu Caçapava</title>
+		<title>LOGIN NO PORTAL - Colégio Galileu Caçapava</title>
 
 
 		<!-- bootstrap css e icons -->

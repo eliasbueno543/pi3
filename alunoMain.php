@@ -8,7 +8,7 @@
 	
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>PORTAL DO ALUNO - Colégio Galileu Caçapava</title>
+		<title>Bem-vindo(a) - PORTAL DO ALUNO Colégio Galileu Caçapava</title>
 
 		<!-- bootstrap css e icons -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -37,6 +37,7 @@
 				  <span class="navbar-toggler-icon"></span>
 				</button>
 			  
+				<!-- botão de lougout -->
 				<button type="button" class="btn btn-light order-md-last" id="userLogout">Sair</button>
 			
 				<!-- a barra em si -->
@@ -73,6 +74,7 @@
 					require 'php/conexao.php';
 					$conn = conectar();
 					
+					// retorna o nome do aluno de acordo com o id da sessao
 					$query = "SELECT * FROM aluno WHERE cpf=?";
 					$stmt = $conn->prepare($query);
 					$stmt->bind_param("i", $_SESSION['cpf']);
@@ -93,6 +95,8 @@
 				<!-- user info -->
 				<div class="card-body fs-2 text-start">
 					<?php
+					
+						// retorna os dados do aluno de acordo com o id da sessao
 						$query = "SELECT * FROM aluno WHERE cpf=?";
 						$stmt = $conn->prepare($query);
 						$stmt->bind_param("i", $_SESSION['cpf']);

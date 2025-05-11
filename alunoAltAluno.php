@@ -12,7 +12,7 @@
 	
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<title>PORTAL DO ALUNO - Colégio Galileu Caçapava</title>
+  	<title>Alterar dados - PORTAL DO ALUNO Colégio Galileu Caçapava</title>
 
   	<!-- bootstrap css e icons -->
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -41,6 +41,7 @@
 				  <span class="navbar-toggler-icon"></span>
 				</button>
 			  
+				<!-- botão de lougout -->
 				<button type="button" class="btn btn-light order-md-last" id="userLogout">Sair</button>
 			
 				<!-- a barra em si -->
@@ -84,6 +85,7 @@
 						<label for="nome" class="form-label">Nome</label>
 						<input name="nome" type="text" class="form-control" id="nome" value="<?php
 							
+							// seleciona os dados da tabela de alunos considerando o id da sessão
 							$query = 'SELECT `nome` FROM `aluno` WHERE `cpf`=?';
 							$stmt = $conn->prepare($query);
 							$stmt->bind_param("i", $_SESSION['cpf']);

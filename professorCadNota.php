@@ -12,7 +12,7 @@
 	
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<title>PORTAL DO ALUNO - Colégio Galileu Caçapava</title>
+  	<title>Registrar notas - PORTAL DO PROFESSOR Colégio Galileu Caçapava</title>
 
   	<!-- bootstrap css e icons -->
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -42,6 +42,7 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 		  
+				<!-- botão de lougout -->
 				<button type="button" class="btn btn-light order-md-last" id="userLogout">Sair</button>
         
 				<!-- a barra em si -->
@@ -80,7 +81,7 @@
 						  
 							<ul class="dropdown-menu">
 							
-								<li><a href="professorNota.php" class="dropdown-item">Vizualizar</a></li>
+								<li><a href="professorNota.php" class="dropdown-item">Visualizar</a></li>
 								<li><a href="professorCadNota.php" class="dropdown-item active">Registrar</a></li>
 								
 							</ul>
@@ -100,11 +101,14 @@
 					<div class="col-5">
 						<select name="notaClasse" id="notaClasse" class="form-select">
 							<?php
+							
+								// retorna uma lista de todas as series cadastradas
 								$query = "SELECT * FROM serie";
 								$result = $conn->query($query);
 								
 								echo "<option selected='selected' value=null disabled>Selecione uma classe</option>";
 							
+								// cria uma lista das series EXCETO maternal ja que nao tem nota
 								while($row = $result->fetch_assoc()){
 									if (!str_contains($row['classe'], 'E')){
 										echo "<option value='".$row['classe']."'>".$row['classe']."</option>";
@@ -114,6 +118,7 @@
 						</select>
 					</div>
 						
+					<!-- alunos da serie selecionada -->
 					<div class="col-5">
 						<select name="notaAluno" id="notaAluno" class="form-select">
 							
@@ -149,6 +154,8 @@
 							
 							<select name="notaMateria" id="notaMateria" class="form-select mb-3 mt-3">
 								<?php
+								
+									// retorna uma lista das materias cadastradas
 									$query = "SELECT * FROM materia";
 									$result = $conn->query($query);
 									
@@ -162,6 +169,7 @@
 							
 							<select name="notaBim" id="notaBim" class="form-select mb-3">
 								<?php
+									// retorna uma lista de 1o a 4o bimestre
 									echo "<option selected='selected' value=null disabled>Bimestre</option>";
 									
 									for($i = 1; $i <= 4; $i++){
@@ -172,6 +180,7 @@
 							
 							<select name="notaValor" id="notaValor" class="form-select mb-3">
 								<?php
+									// retorna uma lista de notas de 0 a 10
 									echo "<option selected='selected' value=null disabled>Valor</option>";
 									
 									for($i = 0; $i <= 10; $i++){

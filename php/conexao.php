@@ -4,7 +4,7 @@
 	function conectar(){
 		
 		$server = "localhost";	// nome do servidor hospedando a aplicacao
-		$username = "root";	// nome para login no banco
+		$username = "root";		// nome para login no banco
 		$password = "";			// senha para login no banco
 		$db = "pi3";			// nome do banco de dados
 		

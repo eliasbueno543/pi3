@@ -10,7 +10,7 @@
 	
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<title>PORTAL DO ALUNO - Colégio Galileu Caçapava</title>
+  	<title>Tabela de notas - PORTAL DO ALUNO Colégio Galileu Caçapava</title>
 
   	<!-- bootstrap css e icons -->
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -39,6 +39,7 @@
 				  <span class="navbar-toggler-icon"></span>
 				</button>
 			  
+				<!-- botão de lougout -->
 				<button type="button" class="btn btn-light order-md-last" id="userLogout">Sair</button>
 			
 				<!-- a barra em si -->
@@ -73,6 +74,7 @@
 				<select name="notaAlunoMateria" id="notaAlunoMateria" class="form-select mb-3">
 					<?php
 					
+						// cria uma lista de todas as materias registradas no db
 						require "php/conexao.php";
 						$conn = conectar();
 						$query = "SELECT * FROM materia";
@@ -91,14 +93,14 @@
 					<button type="button" class="btn btn-primary col-10 col-lg-6" id="mostrarAlunoNota">Mostrar notas</button>
 				</div>
 				
-				<!-- nota media -->
+				<!-- nota media AKA boletim -->
 				<div class="col-12 form-control">
 					<div class="text-start fs-4 font-monospace" id="notaTotal"></div>
 				</div>
 				
 			</div>
 			
-			<!-- notas -->
+			<!-- notas individuais com a materia relacionada e o bimestre referente -->
 			<div class="col-12 col-lg-5 mt-3">
 				<div class="col-12 form-control mb-3">
 					<div class="text-start fs-4 font-monospace" id="visualNota"></div>

@@ -12,7 +12,7 @@
 	
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<title>PORTAL DO ALUNO - Colégio Galileu Caçapava</title>
+  	<title>Visualizar notas - PORTAL DO PROFESSOR Colégio Galileu Caçapava</title>
 
   	<!-- bootstrap css e icons -->
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -42,6 +42,7 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 		  
+				<!-- botão de lougout -->
 				<button type="button" class="btn btn-light order-md-last" id="userLogout">Sair</button>
         
 				<!-- a barra em si -->
@@ -80,7 +81,7 @@
 						  
 							<ul class="dropdown-menu">
 							
-								<li><a href="professorNota.php" class="dropdown-item active">Vizualizar</a></li>
+								<li><a href="professorNota.php" class="dropdown-item active">Visualizar</a></li>
 								<li><a href="professorCadNota.php" class="dropdown-item">Registrar</a></li>
 								
 							</ul>
@@ -100,11 +101,14 @@
 					<div class="col-5">
 						<select name="notaClasse" id="notaClasse" class="form-select">
 							<?php
+							
+								// retorna uma lista das series registradas
 								$query = "SELECT * FROM serie";
 								$result = $conn->query($query);
 								
 								echo "<option selected='selected' value=null disabled>Selecione uma classe</option>";
 							
+								// cria uma lista das series EXCETO maternal porq nao tem nota
 								while($row = $result->fetch_assoc()){
 									if (!str_contains($row['classe'], 'E')){
 										echo "<option value='".$row['classe']."'>".$row['classe']."</option>";
@@ -114,6 +118,7 @@
 						</select>
 					</div>
 						
+					<!-- lista onde vao estar os alunos da serie registrada -->
 					<div class="col-5">
 						<select name="notaAluno" id="notaAluno" class="form-select">
 							
@@ -137,7 +142,7 @@
 					<span class='text-uppercase'>classe: </span><span class='text-uppercase' name="nota2Classe" id="nota2Classe">?</span><br>
 				</div>
 
-				<!-- nota media -->
+				<!-- nota media AKA boletim bimestral -->
 				<div class="col-12 form-control">
 					<div class="text-start fs-4 font-monospace" id="notaTotal"></div>
 				</div>
@@ -146,6 +151,7 @@
 			<div class="col-12 col-lg-5 mb-3 mt-3">
 				<select name="notaMateria" id="notaMateria" class="form-select mb-3 col-12 col-lg-5 ">
 					<?php
+						// retorna uma lista de materias registradas
 						$query = "SELECT * FROM materia";
 						$result = $conn->query($query);
 						
@@ -162,7 +168,7 @@
 					<button type="button" class="btn btn-primary col-10 col-lg-6" id="mostrarNota">Mostrar notas</button>
 				</div>
 				
-				<!-- notas -->
+				<!-- notas individuais com bimestre e materia -->
 				<div class="col-12 col-lg-12 mt-3">
 					<div class="col-12 form-control mb-3">
 						<div class="text-start fs-4 font-monospace" id="visualNota"></div>

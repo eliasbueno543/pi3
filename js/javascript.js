@@ -13,7 +13,6 @@ $(document).ready(function(){
 				if (data == false){
 					$('#erroMensagem').html("CPF ou SENHA incorretos!");
 				}else{
-					// alert(data); // teste
 					// enviar para página portal correta
 					location.replace(data);
 				}
@@ -36,7 +35,6 @@ $(document).ready(function(){
 				if (data == false){
 					$('#erroMensagem').html("CPF ou SENHA incorretos!")
 				}else{
-					// alert(data); // teste
 					// enviar para página portal correta
 					location.replace(data);
 				}
@@ -54,7 +52,6 @@ $(document).ready(function(){
 		$.ajax({
 			url: 'php/logout.php',
 			success: function(data,status){
-				// alert(data); // teste
 				// enviar para pagina inicial
 				location.replace(data);
 			},
@@ -158,9 +155,9 @@ $(document).ready(function(){
 	});
 });
 
-// cadastrar nota de aluno selecionar aluno
+// cadastrar nota de aluno FORMULARIO DE SELECIONAR ALUNO ANTES DE ALTERAR OU CADASTRAR
 $(document).ready(function(){
-	// select num1 é ativado
+	// serie do aluno e selecionada
 	var selOne = null;
 	$('#notaClasse').change(function(){
 		selOne = $('#notaClasse').find(":selected").val();
@@ -180,12 +177,11 @@ $(document).ready(function(){
 		});
 	});
 	
-	// select num2 é ativado
+	// nome do aluno e selecionado
 	var selTwo = null;
 	$('#notaAluno').change(function(){
 		selTwo = $('#notaAluno').find(":selected").val();
 		if (selTwo != null){
-			// alert(selTwo);
 			$.ajax({
 			type: 'post',
 			url: 'php/altAlunoNotaSelect.php',
@@ -193,8 +189,8 @@ $(document).ready(function(){
 				selTwo: selTwo
 			},
 			success: function(data, status){
+				// retornado array com os dados do aluno
 				var alunoArray = JSON.parse(data);
-				//alert(alunoArray);
 				
 				$('#notaCpf').html(alunoArray['cpf']);
 				$('#notaNome').html(alunoArray['nome']);
@@ -202,6 +198,7 @@ $(document).ready(function(){
 				$('#notaNascimento').html(alunoArray['nascimento']);
 				$('#nota2Classe').html(alunoArray['classe']);
 				
+				// define o valor de um campo do html para mostrar os dados do aluno
 				document.getElementById('nota2Cpf').value = alunoArray['cpf'];
 				
 			},
@@ -212,9 +209,8 @@ $(document).ready(function(){
 		}
 	});
 	
-	// select 3, apenas mostrando
+	// select 3, usado para visualizar notas sem altera-las
 	$('#mostrarNota').click(function(){
-		//alert(document.getElementById('notaMateria').value);
 		$.ajax({
 			type: 'post',
 			url: 'php/profMostrarNota.php',
@@ -224,7 +220,6 @@ $(document).ready(function(){
 			},
 			success: function(data,status){
 				var notaArray = JSON.parse(data);
-				// alert(notaArray[0]);
 				$('#visualNota').html(notaArray[0]);
 				$('#notaTotal').html(notaArray[1]);
 			},
@@ -238,7 +233,6 @@ $(document).ready(function(){
 // aluno mostrar Nota
 $(document).ready(function(){
 	$('#mostrarAlunoNota').click(function(){
-		// alert(document.getElementById('notaAlunoMateria').value);
 		$.ajax({
 			type: 'post',
 			url: 'php/alunoMostrarNota.php',
@@ -246,10 +240,8 @@ $(document).ready(function(){
 				materia: document.getElementById('notaAlunoMateria').value
 			},
 			success: function(data,status){
+				// array com os dados de nota do aluno
 				var notaArray = JSON.parse(data);
-				// alert(notaArray[0]);
-				// alert(data);
-				// alert();
 				$('#visualNota').html(notaArray[0]);
 				$('#notaTotal').html(notaArray[1]);
 			},
@@ -264,8 +256,6 @@ $(document).ready(function(){
 $(document).ready(function(){
 	// apertar botao
 	$('#notaCad').click(function(){
-		//alert();
-		
 		$.ajax({
 			type: 'post',
 			url: 'php/cadNota.php',
@@ -293,9 +283,9 @@ $(document).ready(function(){
 	});
 });
 
-// alterar dados aluno selecionar aluno
+// alterar dados aluno FORMULARIO DE SELECIONAR ALUNO ANTES DE ALTERAR OU CADASTRAR
 $(document).ready(function(){
-	// select num1 é ativado
+	// serie do aluno e selecionada
 	var selOne = null;
 	$('#escolherClasse').change(function(){
 		selOne = $('#escolherClasse').find(":selected").val();
@@ -307,7 +297,6 @@ $(document).ready(function(){
 			},
 			success: function(data, status){
 				$('#escolherAluno').html(data);
-				// alert(data);
 			},
 			error: function(data, status){
 				alert(data+status)
@@ -315,7 +304,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	// select num2 é ativado
+	// nome do aluno e selecionado
 	var selTwo = null;
 	$('#escolherAluno').change(function(){
 		selTwo = $('#escolherAluno').find(":selected").val();
@@ -328,8 +317,8 @@ $(document).ready(function(){
 				selTwo: selTwo
 			},
 			success: function(data, status){
+				// array com os dados do aluno
 				var alunoArray = JSON.parse(data);
-				// alert(ar['nome']);
 				
 				document.getElementById('cpf').value = alunoArray['cpf'];
 				document.getElementById('nome').placeholder = alunoArray['nome'];
