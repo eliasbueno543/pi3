@@ -1,6 +1,16 @@
 <?php
 
 	session_start();
+	require "php/conexao.php";
+	$conn = conectar();
+	
+	// query pra permitir que o prof possa apenas alterar a si propria
+	$query = "SELECT * FROM professor WHERE cpf=?";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("i", $_SESSION['cpf']);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$data = $result->fetch_assoc();
 
 ?>
 
@@ -10,7 +20,7 @@
 	
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<title>Cadastrar professor - PORTAL DO PROFESSOR Colégio Galileu Caçapava</title>
+  	<title>Alterar dados - PORTAL DO PROFESSOR Colégio Galileu Caçapava</title>
 
   	<!-- bootstrap css e icons -->
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -53,23 +63,23 @@
 						</li>
 						
 						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Alterar dados</a>
+							<a href="#" class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">Alterar dados</a>
 						  
 							<ul class="dropdown-menu">
 							
-								<li><a href="professorAltProf.php" class="dropdown-item">Seus dados</a></li>
+								<li><a href="professorAltProf.php" class="dropdown-item active">Seus dados</a></li>
 								<li><a href="professorAltAluno.php" class="dropdown-item">Dados de aluno</a></li>
 								
 							</ul>
 						</li>
             
 						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastrar</a>
+							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastrar</a>
 						  
 							<ul class="dropdown-menu">
 							
 								<li><a href="professorCadAluno.php" class="dropdown-item">Aluno</a></li>
-								<li><a href="professorCadProf.php active" class="dropdown-item active">Professor</a></li>
+								<li><a href="professorCadProf.php" class="dropdown-item">Professor</a></li>
 								
 							</ul>
 						</li>
@@ -94,18 +104,18 @@
 		
 		<!-- formulario -->
 		<div class="container-fluid d-flex justify-content-center col-11 col-lg-10">
-			<form class="form-control mb-3 mt-3" id="formCadProf">
+			<form class="form-control mb-3 mt-3" id="formAltProf">
 							
 				<!-- campos a serem preenchidos -->
 				<div class="row container-fluid d-flex justify-content-center">
 					<div class="mb-3 col-md-5">
 						<label for="cpf" class="form-label">CPF</label>
-						<input name="cpf" type="number" class="form-control" id="cpf">
+						<input name="cpf" type="number" class="form-control" id="cpf" value="<?php echo $data['cpf']; ?>" disabled readonly>
 					</div>
 					
 					<div class="mb-3 col-md-5">
 						<label for="nome" class="form-label">Nome</label>
-						<input name="nome" type="text" class="form-control" id="nome">
+						<input name="nome" type="text" class="form-control" id="nome" placeholder="<?php echo $data['nome']; ?>">
 					</div>
 				</div>
 				
@@ -137,9 +147,9 @@
 					</div>
 				</div>
 				
-				<!-- botão pra cadastrar -->
-				<div class="row container-fluid d-flex justify-content-center">
-					<button type="button" class="btn btn-primary col-10 col-lg-6" id="cadProf">Cadastrar Professor</button>
+				<!-- botão pra alterar os dados -->
+				<div class="row container-fluid d-flex justify-content-center mb-3 mt-2">
+					<button type="button" class="btn btn-primary col-10 col-lg-6" id="altProf">Alterar dados de professor</button>
 				</div>
 			</form>
 		</div>
@@ -152,6 +162,7 @@
 		</div>
 
 		<!-- javascript, colocado no fim do body pra acelerar o carregamento da página -->
+		
 		<!-- bootstrap js -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 	

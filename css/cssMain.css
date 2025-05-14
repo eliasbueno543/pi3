@@ -1,8 +1,17 @@
-html,body
-{
+/* controle de tramanho do site */
+html,body{
     width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
     overflow-x: hidden; 
 }
+
+/* error msg */
+#erro{
+	color: #c91616;
+	border-style: solid;
+	border-color: inherit;
+}
+
+/* ... */

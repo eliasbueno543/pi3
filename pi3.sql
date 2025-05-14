@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2025 at 01:44 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Tempo de geração: 10/05/2025 às 04:46
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pi3`
+-- Banco de dados: `pi3`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `aluno`
+-- Estrutura para tabela `aluno`
 --
 
 CREATE TABLE `aluno` (
@@ -37,16 +37,71 @@ CREATE TABLE `aluno` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `aluno`
+-- Despejando dados para a tabela `aluno`
 --
 
 INSERT INTO `aluno` (`cpf`, `senha`, `nome`, `nascimento`, `genero`, `classe`) VALUES
+(3, 0x243279243130246f4666794e636a4a7959356270494b69344f7458594f524c6672503754586f2e4162747778537a38394a486a705058667246524165, 0x616c756e6f747265737465737465, '2025-05-06', 'M', 'E2-B'),
+(4, 0x243279243130244c6f3645546c345831513067434c7831432e35754d756f36544a63385954426e50686f624d664c7642656e6e37577a68703941304f, 0x416c756e6f2054657374652034, '2025-05-08', 'O', 'E2-A'),
+(12, 0x2432792431302450487568504a6a3651696268696f4666495a786a4a2e5230466a3467537641397a75304e6e4b673749623045306e6d4152684b6a57, 0x416c756e6f20546573746520446f6973, '2025-05-05', 'M', '1-A'),
 (10000000000, 0x243279243130247172347068334173786d53684c49346e565574447675636f3438526c6c723657317135337636735938682e776974504c6456726a57, 0x416c756e6f205465737465, '2021-08-30', 'F', 'E2-A');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `professor`
+-- Estrutura para tabela `materia`
+--
+
+CREATE TABLE `materia` (
+  `nome` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `materia`
+--
+
+INSERT INTO `materia` (`nome`) VALUES
+('ciencia'),
+('geografia'),
+('historia'),
+('matematica'),
+('portugues');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `nota`
+--
+
+CREATE TABLE `nota` (
+  `id` int(150) NOT NULL,
+  `aluno` bigint(11) NOT NULL,
+  `materia` varchar(150) NOT NULL,
+  `bimestre` set('1','2','3','4') NOT NULL,
+  `valor` int(2) NOT NULL,
+  `profResponsavel` bigint(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `nota`
+--
+
+INSERT INTO `nota` (`id`, `aluno`, `materia`, `bimestre`, `valor`, `profResponsavel`) VALUES
+(3, 12, 'ciencia', '1', 0, 1),
+(4, 12, 'ciencia', '1', 5, 1),
+(5, 12, 'ciencia', '2', 4, 1),
+(7, 12, 'ciencia', '1', 10, 1),
+(8, 12, 'ciencia', '1', 8, 1),
+(9, 12, 'ciencia', '1', 7, 1),
+(12, 12, 'historia', '3', 10, 1),
+(13, 12, 'matematica', '3', 9, 1),
+(14, 12, 'portugues', '3', 6, 1),
+(16, 12, 'geografia', '1', 10, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `professor`
 --
 
 CREATE TABLE `professor` (
@@ -58,16 +113,16 @@ CREATE TABLE `professor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `professor`
+-- Despejando dados para a tabela `professor`
 --
 
 INSERT INTO `professor` (`cpf`, `senha`, `nome`, `nascimento`, `genero`) VALUES
-(1, 0x24327924313024387438362f39637833444677467532476e762e6c382e786e5631452e69414331427a75367a4f63734a544d2e5171754b2f6a2e5432, 0x61646d, '2025-05-03', 'O');
+(1, 0x243279243130244b5538755635353759496a6478384462475579583865526255706f614968785a4c5a6453536a3456657a6a516c5a77374243443679, 0x61646d, '2025-05-01', 'M');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `serie`
+-- Estrutura para tabela `serie`
 --
 
 CREATE TABLE `serie` (
@@ -75,7 +130,7 @@ CREATE TABLE `serie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `serie`
+-- Despejando dados para a tabela `serie`
 --
 
 INSERT INTO `serie` (`classe`) VALUES
@@ -95,37 +150,70 @@ INSERT INTO `serie` (`classe`) VALUES
 ('E2-B');
 
 --
--- Indexes for dumped tables
+-- Índices para tabelas despejadas
 --
 
 --
--- Indexes for table `aluno`
+-- Índices de tabela `aluno`
 --
 ALTER TABLE `aluno`
   ADD PRIMARY KEY (`cpf`),
   ADD KEY `aluno_serie` (`classe`);
 
 --
--- Indexes for table `professor`
+-- Índices de tabela `materia`
+--
+ALTER TABLE `materia`
+  ADD PRIMARY KEY (`nome`);
+
+--
+-- Índices de tabela `nota`
+--
+ALTER TABLE `nota`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `alunoCpf` (`aluno`),
+  ADD KEY `profCpf` (`profResponsavel`),
+  ADD KEY `materia` (`materia`);
+
+--
+-- Índices de tabela `professor`
 --
 ALTER TABLE `professor`
   ADD PRIMARY KEY (`cpf`);
 
 --
--- Indexes for table `serie`
+-- Índices de tabela `serie`
 --
 ALTER TABLE `serie`
   ADD PRIMARY KEY (`classe`);
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
--- Constraints for table `aluno`
+-- AUTO_INCREMENT de tabela `nota`
+--
+ALTER TABLE `nota`
+  MODIFY `id` int(150) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `aluno`
 --
 ALTER TABLE `aluno`
   ADD CONSTRAINT `aluno_serie` FOREIGN KEY (`classe`) REFERENCES `serie` (`classe`) ON UPDATE CASCADE;
+
+--
+-- Restrições para tabelas `nota`
+--
+ALTER TABLE `nota`
+  ADD CONSTRAINT `alunoCpf` FOREIGN KEY (`aluno`) REFERENCES `aluno` (`cpf`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `materia` FOREIGN KEY (`materia`) REFERENCES `materia` (`nome`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `profCpf` FOREIGN KEY (`profResponsavel`) REFERENCES `professor` (`cpf`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

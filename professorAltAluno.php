@@ -1,6 +1,8 @@
 <?php
 
 	session_start();
+	require "php/conexao.php";
+	$conn = conectar();
 
 ?>
 
@@ -10,7 +12,7 @@
 	
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<title>Cadastrar professor - PORTAL DO PROFESSOR Colégio Galileu Caçapava</title>
+  	<title>Alterar dados de aluno - PORTAL DO PROFESSOR Colégio Galileu Caçapava</title>
 
   	<!-- bootstrap css e icons -->
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -53,23 +55,23 @@
 						</li>
 						
 						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Alterar dados</a>
+							<a href="#" class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">Alterar dados</a>
 						  
 							<ul class="dropdown-menu">
 							
 								<li><a href="professorAltProf.php" class="dropdown-item">Seus dados</a></li>
-								<li><a href="professorAltAluno.php" class="dropdown-item">Dados de aluno</a></li>
+								<li><a href="professorAltAluno.php" class="dropdown-item active">Dados de aluno</a></li>
 								
 							</ul>
 						</li>
             
 						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastrar</a>
+							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastrar</a>
 						  
 							<ul class="dropdown-menu">
 							
 								<li><a href="professorCadAluno.php" class="dropdown-item">Aluno</a></li>
-								<li><a href="professorCadProf.php active" class="dropdown-item active">Professor</a></li>
+								<li><a href="professorCadProf.php" class="dropdown-item">Professor</a></li>
 								
 							</ul>
 						</li>
@@ -92,20 +94,53 @@
 			</div>
 		</nav>
 		
+		<!-- selecao de classe e aluno -->
+		<div class="container-fluid d-flex justify-content-center col-11 col-lg-10">
+			<div class="form-control mt-3">
+				<div class="row container-fluid d-flex justify-content-center">
+					<div class="col-5">
+						<select name="escolherClasse" id="escolherClasse" class="form-select">
+							<?php
+							
+								// procura por todas as series registradas
+								$query = "SELECT * FROM serie";
+								$result = $conn->query($query);
+								
+								echo "<option selected='selected' value=null disabled>Selecione uma classe</option>";
+							
+								while($row = $result->fetch_assoc()){
+									echo "<option value='".$row['classe']."'>".$row['classe']."</option>";
+								}
+							?>
+						</select>
+					</div>
+						
+					<!-- tabela de alunos da serie relacionada -->
+					<div class="col-5">
+						<select name="escolherAluno" id="escolherAluno" class="form-select">
+							
+							
+							
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<!-- formulario -->
 		<div class="container-fluid d-flex justify-content-center col-11 col-lg-10">
-			<form class="form-control mb-3 mt-3" id="formCadProf">
-							
+			<form class="form-control mb-3 mt-3" id="formAltAluno">
+				
 				<!-- campos a serem preenchidos -->
 				<div class="row container-fluid d-flex justify-content-center">
 					<div class="mb-3 col-md-5">
 						<label for="cpf" class="form-label">CPF</label>
-						<input name="cpf" type="number" class="form-control" id="cpf">
+						<input name="cpf" type="number" class="form-control" id="cpf" value="" readonly>
 					</div>
 					
 					<div class="mb-3 col-md-5">
 						<label for="nome" class="form-label">Nome</label>
-						<input name="nome" type="text" class="form-control" id="nome">
+						<input name="nome" type="text" class="form-control" id="nome" placeholder="">
 					</div>
 				</div>
 				
@@ -122,12 +157,12 @@
 				</div>
 				
 				<div class="row container-fluid d-flex justify-content-center">
-					<div class="mb-3 col-md-5">
+					<div class="mb-3 col-md-4">
 						<label for="nascimento" class="form-label">Nascimento</label>
 						<input name="nascimento" type="date" class="form-control" id="nascimento">
 					</div>
 					
-					<div class="mb-3 col-md-5">
+					<div class="mb-3 col-md-3">
 						<label for="genero" class="form-label">Gênero</label>
 						<select name="genero" id="genero" class="form-select">
 							<option value="M">Masculino</option>
@@ -135,11 +170,27 @@
 							<option value="O">Outro</option>
 						</select>
 					</div>
+					
+					<div class="mb-3 col-md-3">
+						<label for="classe" class="form-label">Série</label>
+						<select name="classe" id="classe" class="form-select">
+							<?php
+							
+								$query = "SELECT * FROM serie";
+								$result = $conn->query($query);
+								
+								while($row = $result->fetch_assoc()){
+									echo "<option value='".$row['classe']."'>".$row['classe']."</option>";
+								}
+							
+							?>
+						</select>
+					</div>
 				</div>
 				
-				<!-- botão pra cadastrar -->
-				<div class="row container-fluid d-flex justify-content-center">
-					<button type="button" class="btn btn-primary col-10 col-lg-6" id="cadProf">Cadastrar Professor</button>
+				<!-- botão pra alterar os dados -->
+				<div class="row container-fluid d-flex justify-content-center mb-3 mt-2">
+					<button type="button" class="btn btn-primary col-10 col-lg-6" id="altAluno">Alterar dados de aluno</button>
 				</div>
 			</form>
 		</div>

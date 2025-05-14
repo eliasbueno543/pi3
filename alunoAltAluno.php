@@ -1,6 +1,8 @@
 <?php
 
 	session_start();
+	require "php/conexao.php";
+	$conn = conectar();
 
 ?>
 
@@ -10,7 +12,7 @@
 	
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<title>Cadastrar professor - PORTAL DO PROFESSOR Colégio Galileu Caçapava</title>
+  	<title>Alterar dados - PORTAL DO ALUNO Colégio Galileu Caçapava</title>
 
   	<!-- bootstrap css e icons -->
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -29,117 +31,88 @@
 		<div class="container d-flex justify-content-center">
 			<img src="img/logo.png" class="col-1">
 		</div>
-    
+		
 		<!-- barra de navegacao -->
 		<nav class="navbar navbar-expand-md sticky-top bg-dark" data-bs-theme="dark">
-			
 			<div class="container-fluid">
-        
+			
 				<!-- botao de colapso em telas menores -->
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navegacao" aria-controls="navegacao" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
+				  <span class="navbar-toggler-icon"></span>
 				</button>
-		  
+			  
 				<!-- botão de lougout -->
 				<button type="button" class="btn btn-light order-md-last" id="userLogout">Sair</button>
-        
+			
 				<!-- a barra em si -->
 				<div class="collapse navbar-collapse justify-content-md-center" id="navegacao">
 				  
 					<ul class="navbar-nav navbar-nav-scroll col-md-10 justify-content-md-evenly" style="--bs-scroll-height: 100px;">
-            
+					
+						<!-- itens -->
 						<li class="nav-item">
-							<a href="professorMain.php" class="nav-link" aria-current="page">Painel</a>
+							<a href="alunoMain.php" class="nav-link" aria-current="page">Painel</a>
 						</li>
 						
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Alterar dados</a>
-						  
-							<ul class="dropdown-menu">
-							
-								<li><a href="professorAltProf.php" class="dropdown-item">Seus dados</a></li>
-								<li><a href="professorAltAluno.php" class="dropdown-item">Dados de aluno</a></li>
-								
-							</ul>
-						</li>
-            
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastrar</a>
-						  
-							<ul class="dropdown-menu">
-							
-								<li><a href="professorCadAluno.php" class="dropdown-item">Aluno</a></li>
-								<li><a href="professorCadProf.php active" class="dropdown-item active">Professor</a></li>
-								
-							</ul>
+						<li class="nav-item">
+							<a href="alunoNota.php" class="nav-link" aria-current="page">Notas</a>
 						</li>
 						
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Notas</a>
-						  
-							<ul class="dropdown-menu">
-							
-								<li><a href="professorNota.php" class="dropdown-item">Visualizar</a></li>
-								<li><a href="professorCadNota.php" class="dropdown-item">Registrar</a></li>
-								
-							</ul>
+						<li class="nav-item">
+							<a href="alunoAltAluno.php" class="nav-link active" aria-current="page">Mudar dados</a>
 						</li>
-            
+					
 					</ul>
-          
+				  
 				</div>
-        
+			
 			</div>
 		</nav>
 		
+		<!-- info -->
 		<!-- formulario -->
 		<div class="container-fluid d-flex justify-content-center col-11 col-lg-10">
-			<form class="form-control mb-3 mt-3" id="formCadProf">
-							
+			<form class="form-control mb-3 mt-3" id="formAltAluno">
+				
 				<!-- campos a serem preenchidos -->
 				<div class="row container-fluid d-flex justify-content-center">
 					<div class="mb-3 col-md-5">
 						<label for="cpf" class="form-label">CPF</label>
-						<input name="cpf" type="number" class="form-control" id="cpf">
+						<input name="cpf" type="number" class="form-control" id="cpf" value="<?php echo $_SESSION['cpf']; ?>" readonly>
 					</div>
 					
 					<div class="mb-3 col-md-5">
 						<label for="nome" class="form-label">Nome</label>
-						<input name="nome" type="text" class="form-control" id="nome">
+						<input name="nome" type="text" class="form-control" id="nome" value="<?php
+							
+							// seleciona os dados da tabela de alunos considerando o id da sessão
+							$query = 'SELECT `nome` FROM `aluno` WHERE `cpf`=?';
+							$stmt = $conn->prepare($query);
+							$stmt->bind_param("i", $_SESSION['cpf']);
+							$stmt->execute();
+							$result = $stmt->get_result();
+							$data = $result->fetch_assoc();
+							echo $data['nome'];
+							
+						?>" readonly>
 					</div>
 				</div>
 				
 				<div class="row container-fluid d-flex justify-content-center">
 					<div class="mb-3 col-md-5">
 						<label for="senha" class="form-label">Senha</label>
-						<input name="senha" type="password" class="form-control" id="senha">
+						<input name="altAlunoSenha" type="password" class="form-control" id="altAlunoSenha">
 					</div>
 					
 					<div class="mb-3 col-md-5">
 						<label for="confirmar" class="form-label">Confirmar senha</label>
-						<input name="confirmar" type="password" class="form-control" id="confirmar">
+						<input name="altAlunoConfirmar" type="password" class="form-control" id="altAlunoConfirmar">
 					</div>
 				</div>
 				
-				<div class="row container-fluid d-flex justify-content-center">
-					<div class="mb-3 col-md-5">
-						<label for="nascimento" class="form-label">Nascimento</label>
-						<input name="nascimento" type="date" class="form-control" id="nascimento">
-					</div>
-					
-					<div class="mb-3 col-md-5">
-						<label for="genero" class="form-label">Gênero</label>
-						<select name="genero" id="genero" class="form-select">
-							<option value="M">Masculino</option>
-							<option value="F">Feminino</option>
-							<option value="O">Outro</option>
-						</select>
-					</div>
-				</div>
-				
-				<!-- botão pra cadastrar -->
-				<div class="row container-fluid d-flex justify-content-center">
-					<button type="button" class="btn btn-primary col-10 col-lg-6" id="cadProf">Cadastrar Professor</button>
+				<!-- botão pra alterar os dados -->
+				<div class="row container-fluid d-flex justify-content-center mb-3 mt-2">
+					<button type="button" class="btn btn-primary col-10 col-lg-6" id="alunoAltAluno">Alterar dados</button>
 				</div>
 			</form>
 		</div>
