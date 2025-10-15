@@ -45,3 +45,6 @@
 - Comentários no código
 - Limpeza de código
 - Correção nos valores do banco de dados para melhoria da interface de usuário
+
+## 15/10/2025
+- Transferência de propriedade de repositório para perfil profissional
